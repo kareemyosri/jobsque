@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  buildcondition:
+    dependency: "direct main"
+    description:
+      name: buildcondition
+      sha256: "0fbea68c68a17f4e13cdf68313c5932d476c6cb46e794b3058c7ff19d5e79be3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   characters:
     dependency: transitive
     description:
@@ -105,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0+3"
+  email_validator:
+    dependency: "direct main"
+    description:
+      name: email_validator
+      sha256: e9a90f27ab2b915a27d7f9c2a7ddda5dd752d6942616ee83529b686fc086221b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.17"
   fake_async:
     dependency: transitive
     description:
@@ -357,14 +373,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
-  responsive_sizer:
-    dependency: "direct main"
-    description:
-      name: responsive_sizer
-      sha256: "206d1f77f65ed8394ef2a526583e38e874ee36f036f3fe9aefb0f58ecba9bef9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.0"
   shared_preferences:
     dependency: "direct main"
     description:

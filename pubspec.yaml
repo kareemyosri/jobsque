@@ -36,7 +36,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   sizer: ^2.0.15
-  responsive_sizer: ^3.2.0
   device_preview: ^1.1.0
   iconsax: ^0.0.8
   smooth_page_indicator: ^1.1.0
@@ -50,6 +49,10 @@ dependencies:
   bloc: ^8.1.2
   shared_preferences: ^2.2.1
   dio: ^5.3.2
+  email_validator: ^2.1.17
+  buildcondition: ^0.0.4
+
+
 
 dev_dependencies:
   flutter_test:
