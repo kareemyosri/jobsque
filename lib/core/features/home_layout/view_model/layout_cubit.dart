@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../applied_job/view/screens/applied_job.dart';
-import '../../home/screens/home_screen.dart';
+import '../../home/view/screens/home_screen.dart';
 import '../../messsages_screen/screens/messages_screen.dart';
 import '../../profile/view/screen/profile_screen.dart';
 import '../../saved_job/screens/saved_job_screen.dart';

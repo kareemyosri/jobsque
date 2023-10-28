@@ -8,7 +8,7 @@ import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/TextFormField.dart';
 import '../../../../../util/widgets/header.dart';
 import '../../../../../util/widgets/job_feature.dart';
-import '../../../../../util/widgets/recent_job_item.dart';
+import '../../../home/view/widgets/recent_job_item.dart';
 import '../../../../../util/widgets/search_filter_drop_down.dart';
 
 
@@ -256,11 +256,13 @@ class SearchScreenResult extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context,index)=>
-                        RecentJobItem(jobTitle: "Senior UI Designer", jobSubTitle: "Twitter • Jakarta, Indonesia "),
-                    separatorBuilder: (context,index)=>Divider(),
+                        // RecentJobItem( jobData: null,) here important*****
+                    Container() //delete it
+                    ,
+                    separatorBuilder: (context,index)=>const Divider(),
                     itemCount: 10),
               )
 

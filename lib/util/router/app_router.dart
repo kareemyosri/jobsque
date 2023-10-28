@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.dart';
+import 'package:jobsque/core/features/home/model/job_model.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
+import '../../core/features/apply_job/view/screens/job_details.dart';
 import '../../core/features/create_account/view/screens/location_register_screen.dart';
 import '../../core/features/create_account/view/screens/register_screen.dart';
 import '../../core/features/create_account/view/screens/success_register_screen.dart';
@@ -10,7 +13,7 @@ import '../../core/features/forgot_password/view/screens/checkmail_password_scre
 import '../../core/features/forgot_password/view/screens/create_new_password.dart';
 import '../../core/features/forgot_password/view/screens/forgotpassword_screen.dart';
 import '../../core/features/forgot_password/view/screens/success_ForgotPassword_screen.dart';
-import '../../core/features/home/screens/home_screen.dart';
+import '../../core/features/home/view/screens/home_screen.dart';
 import '../../core/features/home_layout/view/screens/layout_app.dart';
 import '../../core/features/login/view/screens/login_screen.dart';
 import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
@@ -48,6 +51,12 @@ Route? onGenerateRouter(RouteSettings settings){
       return MaterialPageRoute(builder: (_)=>  const LayoutScreen());
     case AppRoute.homeScreen:
       return MaterialPageRoute(builder: (_)=>  HomeScreen());
+    case AppRoute.jobDetailsScreen:
+      final args = settings.arguments as JobData;
+      return MaterialPageRoute(builder: (_)=>  JobDetails(jobData: args,));
+    case AppRoute.applyJobScreen:
+      return MaterialPageRoute(builder: (_)=>  ApplyJob());
+
     // case AppRoute.registerScreen:
     //   return MaterialPageRoute(builder: (_)=>  RegisterScreenTask());
     // case AppRoute.loginScreen:

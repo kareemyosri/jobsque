@@ -2,17 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/core/features/home/model/job_model.dart';
+import 'package:jobsque/util/router/app_route.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/color.dart';
-import 'job_feature.dart';
+import '../../../../../util/styles/color.dart';
+import '../../../../../util/widgets/job_feature.dart';
 
 class RecentJobItem extends StatelessWidget {
-  final String jobTitle;
-  final String jobSubTitle;
+  final JobData jobData;
+
   const RecentJobItem({super.key,
-    required this.jobTitle,
-    required this.jobSubTitle,
+     required this.jobData,
   });
 
   @override
@@ -20,6 +21,9 @@ class RecentJobItem extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          onTap: (){
+            Navigator.pushNamed(context, AppRoute.jobDetailsScreen,arguments: jobData);
+          },
           leading: Container(
               width: 40,
               height: 40,
@@ -27,9 +31,10 @@ class RecentJobItem extends StatelessWidget {
                 color: const Color(0xFF6690FF),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               ),
-              child: SvgPicture.asset("assets/images/home/twitter.svg")),
+              child: Image.network(jobData.image!)
+          ),
           title: Text(
-            jobTitle,
+            jobData.name!,
             style: TextStyle(
               color:AppTheme.neutral9,
               fontSize: 15.sp,
@@ -37,15 +42,33 @@ class RecentJobItem extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          subtitle: Text(
-            jobSubTitle,
-            style: TextStyle(
-              color: AppTheme.neutral7,
-              fontSize: 10.sp,
-              fontFamily: 'SFProDisplay',
-              fontWeight: FontWeight.w400,
+          subtitle: Row(
+            children: [
+              Text(
+                jobData.compName!,
+                style: TextStyle(
+                  color: AppTheme.neutral7,
+                  fontSize: 10.sp,
+                  fontFamily: 'SFProDisplay',
+                  fontWeight: FontWeight.w400,
 
-            ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  "• ${jobData.location!}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: AppTheme.neutral7,
+                    fontSize: 10.sp,
+                    fontFamily: 'SFProDisplay',
+                    fontWeight: FontWeight.w400,
+
+                  ),
+                ),
+              ),
+            ],
           ),
           trailing: IconButton(onPressed: () {  },
             icon: const Icon(Iconsax.archive_minus),
@@ -57,9 +80,9 @@ class RecentJobItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const JobFeature(text: "Full time",),
-          const JobFeature(text: "Remote",),
-          const JobFeature(text: "Senior",),
+           JobFeature(text: jobData.jobTimeType!,),
+         // const JobFeature(text: "Remote",),
+           JobFeature(text: jobData.jobType!,),
 
          Column(
            children: [
@@ -67,7 +90,7 @@ class RecentJobItem extends StatelessWidget {
                TextSpan(
                  children: [
                    TextSpan(
-                     text: '\$15K',
+                     text: '\$${jobData.salary!}',
                      style: TextStyle(
                        color: AppTheme.success7,
                        fontSize: 13.5.sp,

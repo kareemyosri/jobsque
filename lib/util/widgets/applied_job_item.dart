@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:jobsque/util/widgets/stepper_indicator.dart';
+import 'package:jobsque/core/features/apply_job/view/widgets/stepper_indicator.dart';
 import 'package:sizer/sizer.dart';
 
 import '../styles/color.dart';
