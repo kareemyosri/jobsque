@@ -3,5 +3,7 @@ const String register="/auth/register";
 const String login="/auth/login";
 const String editProfile="/user/profile/edit";
 const String allJobsURL='/jobs';
+const String applyJobURL='/apply';
+
 //const String resturant="restaurent";
 //const String food="food";

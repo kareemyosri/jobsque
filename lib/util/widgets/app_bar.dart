@@ -11,10 +11,10 @@ AppBar customAppBar(String title,context,{List<Widget>? actions,Color? backgroun
     backgroundColor: backgroundColor ,
     title: Text(title,
         style:  TextStyle(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-          fontFamily: 'SFProDisplay',
-          color: AppTheme.neutral9
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'SFProDisplay',
+            color: AppTheme.neutral9
         )),
     centerTitle: true,
   );

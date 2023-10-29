@@ -70,7 +70,7 @@ class UploadPortfolio extends StatelessWidget {
             //SizedBox(height: 1.h),
             ListView.builder(
               padding: EdgeInsets.zero,
-                itemCount: 10,
+                itemCount: 2,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) =>  CustomPortfolioItem()

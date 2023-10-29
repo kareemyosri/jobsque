@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../util/styles/color.dart';
-import '../../../../../util/widgets/type_of_work_item_tile.dart';
+import '../widgets/type_of_work_item_tile.dart';
 
 
 
-class TypeOfWorkScreen extends StatelessWidget {
+class TypeOfWorkScreen extends StatefulWidget {
   const TypeOfWorkScreen({super.key});
 
+  @override
+  State<TypeOfWorkScreen> createState() => _TypeOfWorkScreenState();
+}
+
+class _TypeOfWorkScreenState extends State<TypeOfWorkScreen> {
+  late JobCubit cubit;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit=JobCubit.get(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,13 +50,16 @@ class TypeOfWorkScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 3.h,),
-           const TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 1,),
-           SizedBox(height: 2.h,),
-           const TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 2,isSelected: true,),
-          SizedBox(height: 2.h,),
-          const TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 3,),
-          SizedBox(height: 2.h,),
-          const TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 4,),
+          //   TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 1,),
+          //  SizedBox(height: 2.h,),
+          //   TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 2),
+          // SizedBox(height: 2.h,),
+          //  TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 3,),
+          // SizedBox(height: 2.h,),
+          //  TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 4,),
+          Column(
+            children: cubit.typeOfWorkTiles,
+          ),
 
           SizedBox(height: 2.h),
         ],

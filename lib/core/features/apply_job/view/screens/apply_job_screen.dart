@@ -1,39 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/bio_data_screen.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/type_of_work_screen.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/upload_portfolio.dart';
+import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/app_bar.dart';
+import '../../model/form_page_model.dart';
 import '../widgets/stepper_indicator.dart';
 
-
-
-
 class ApplyJob extends StatefulWidget {
- // final List<FormPage> formPages;
-  const ApplyJob( {super.key});
+  // final List<FormPage> formPages;
+  const ApplyJob({super.key});
 
   @override
   State<ApplyJob> createState() => _FormStepsState();
 }
 
 class _FormStepsState extends State<ApplyJob> {
-  int currentStep = 0;
   late PageController _pageController;
-  List formPages=[
+  late JobCubit cubit;
 
-    FormPage(pageTitle: 'Bio Data', page:  BioDataScreen()),
 
-    FormPage(pageTitle: 'Type of work', page: const TypeOfWorkScreen()),
 
-    FormPage(
-
-        pageTitle: 'Upload portfolio', page: const UploadPortfolio()),
-
-  ];
 
   @override
   void dispose() {
@@ -45,119 +39,106 @@ class _FormStepsState extends State<ApplyJob> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    cubit = JobCubit.get(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: customAppBar("Apply Job", context),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          leading:  IconButton(onPressed: () {
+            cubit.currentStep=0;
+            Navigator.pop(context); },
+            icon: const Icon(Iconsax.arrow_left),),
+
+          title: Text('Apply Job',
+              style:  TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'SFProDisplay',
+                  color: AppTheme.neutral9
+              )),
+          centerTitle: true,
+        ),
         body: Stack(children: [
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 2.h,),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height*0.33,
+                  height: 2.h,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.33,
                   width: MediaQuery.of(context).size.width,
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        StepIndication(
-                            1, "Bio Data", currentStep >= 0,
+                  child: BlocBuilder<JobCubit, JobState>(
+                    builder: (context, state) {
+                      return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            StepIndication(
+                              1,
+                              "Bio Data",
+                              cubit.currentStep >= 0,
                             ),
-                        StepIndication(
-                            2, 'Type of work', currentStep >= 1,
+                            StepIndication(
+                              2,
+                              'Type of work',
+                              cubit.currentStep >= 1,
                             ),
-                        StepIndication(
-                            3, 'Upload portfolio', currentStep >= 2,
-                            lineState: false),
-                      ]
+                            StepIndication(
+                                3, 'Upload portfolio', cubit.currentStep == 2,
+                                lineState: false),
+                          ]);
+                    },
                   ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: PageView(
-                    controller: _pageController,
-                   physics: const NeverScrollableScrollPhysics(),
-                    onPageChanged: (int i) {
-                      //FocusScope.of(context).requestFocus(FocusNode());
-                      setState(() {
-                        currentStep = i;
-                      });
-                    },
-                    children: [
-                      BioDataScreen(),
-                      const TypeOfWorkScreen(),
-                      const UploadPortfolio()
-                    ]
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      onPageChanged: (int i) {
+                        //FocusScope.of(context).requestFocus(FocusNode());
 
-                    // widget.formPages
-                    //     .map((page) => ConstrainedBox(
-                    //     constraints: const BoxConstraints.expand(),
-                    //     child: page.page))
-                    //     .toList(),
-                    // children: <Widget>[
-                    // ConstrainedBox(
-                    //   constraints: const BoxConstraints.expand(),
-                    //   child: const Center(
-                    //     child: Text("Place Bid"),
-                    //   ),
-                    // ),
-                    //   ConstrainedBox(
-                    //     constraints: const BoxConstraints.expand(),
-                    //     child: const Center(
-                    //       child: Text("Buy Now"),
-                    //     ),
-                    //   ),
-                    // ],
-                  ),
+                        cubit.currentStep = i;
+                      },
+                      children: [
+                        BioDataScreen(),
+                        const TypeOfWorkScreen(),
+                        const UploadPortfolio()
+                      ]
+                      ),
                 ),
-                SizedBox(height: 3.h,)
+                SizedBox(
+                  height: 3.h,
+                )
               ],
             ),
           ),
-            Align(
+          Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(24.0),
-              child: CustomElevatedButton((){
-                if (currentStep < 2) {
-                  setState(() {
-                    currentStep = currentStep + 1;
-                  });
-                  _pageController.animateToPage(currentStep,
-                      duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
+              child: BlocBuilder<JobCubit, JobState>(
+  builder: (context, state) {
+    return CustomElevatedButton(() {
+                if (cubit.currentStep < 2) {
+                  cubit.addStep();
 
+                  _pageController.animateToPage(cubit.currentStep,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.decelerate);
+                } else {
+                  cubit.currentStep=0;
+                  //function send data
                 }
-
-               else{
-                 //function send data
-                }
-              },
-
-
-                  currentStep < 2? 'Next':'Submit'),
+              }, cubit.currentStep < 2 ? 'Next' : 'Submit');
+  },
+),
             ),
           ),
-
         ]));
   }
-
 }
-
-class FormPage {
-  final String pageTitle;
-  final Widget page;
-
-  FormPage({
-    required this.pageTitle,
-    required this.page,
-  });
-}
-
-
-
-
