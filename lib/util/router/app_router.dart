@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_successfully.dart';
 import 'package:jobsque/core/features/home/model/job_model.dart';
+import 'package:jobsque/core/features/search/view/screens/search_screen.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
 import '../../core/features/apply_job/view/screens/job_details.dart';
@@ -67,6 +68,8 @@ Route? onGenerateRouter(RouteSettings settings){
       return MaterialPageRoute(builder: (_)=>   PDFScreen());
     case AppRoute.imageScreen:
       return MaterialPageRoute(builder: (_)=>   const ImageScreen());
+    case AppRoute.searchScreen:
+      return MaterialPageRoute(builder: (_)=>    SearchScreen());
 
 
   // case AppRoute.registerScreen:

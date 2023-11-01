@@ -21,6 +21,8 @@ class AppRoute{
   static const String applyJobSuccessfullyScreen="applyJobSuccessfullyScreen";
   static const String pdfScreen="PdfScreen";
   static const String imageScreen="ImageScreen";
+  static const String searchScreen="SearchScreen";
+
 
 
 

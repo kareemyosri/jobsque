@@ -6,6 +6,7 @@ const String allJobsURL='/jobs';
 const String applyJobURL='/apply';
 const String suggestJobsURL='/jobs/sugest/2';
 const String favouriteJobsURL='/favorites';
+const String searchJobUrl='/jobs/filter';
 
 
 //const String resturant="restaurent";

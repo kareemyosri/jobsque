@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
+import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -103,6 +104,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               CustomSearchBar(
+                keyboardType: TextInputType.none,
+                onTap: (){
+                  Navigator.pushNamed(context, AppRoute.searchScreen);
+
+                },
                   controller: searchController, hintText: "Search...."),
               SizedBox(height: 2.h,),
               const JobStatusItem(title: 'Twitter',

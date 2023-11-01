@@ -1,9 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/Models/savedJobItemModel.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
 import 'package:jobsque/core/features/saved_job/model/favourite_model.dart';
+import 'package:jobsque/core/features/saved_job/view_model/favourite_cubit.dart';
 import 'package:jobsque/util/router/app_route.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../util/styles/color.dart';
@@ -84,7 +88,17 @@ class _SavedJobItemState extends State<SavedJobItem> {
                         );
                       },
                     ),
-                    const BottomSheetItem('Share via...', actionIcon: Iconsax.export),
+                     BottomSheetItem('Share via...', actionIcon: Iconsax.export,
+                    onTap: () async{
+                     await FavouriteCubit.get(context).shareImageFromApi(
+                         imageUrl: widget.favouriteData.image!,
+                         text:widget.favouriteData.jobs!.jobDescription!,
+                         subject:widget.favouriteData.jobs!.name!
+                     );
+
+
+                      },
+                    ),
                     BottomSheetItem('Cancel save',
                         actionIcon: Iconsax.archive_minus,
                     onTap: (){
