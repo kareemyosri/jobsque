@@ -1,17 +1,33 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/color.dart';
+import '../../../../../util/styles/color.dart';
 
-class UploadFile extends StatelessWidget {
-  const UploadFile({Key? key}) : super(key: key);
+class UploadFile extends StatefulWidget {
+  final String target;
+  const UploadFile({Key? key, required this.target}) : super(key: key);
 
+  @override
+  State<UploadFile> createState() => _UploadFileState();
+}
+
+class _UploadFileState extends State<UploadFile> {
+  late JobCubit cubit;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit=JobCubit.get(context);
+  }
   @override
   Widget build(BuildContext context) {
     return  InkWell(
-      onTap: () {},
+      onTap: () {
+        cubit.pickFile(widget.target);
+      },
       child: DottedBorder(
         borderType: BorderType.RRect,
         radius: const Radius.circular(8.0),
@@ -43,6 +59,7 @@ class UploadFile extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               Text(
+                widget.target=='CV'? 'Upload your CV':
                 'Upload your other file',
                 style: TextStyle(
                   color: AppTheme.neutral9,

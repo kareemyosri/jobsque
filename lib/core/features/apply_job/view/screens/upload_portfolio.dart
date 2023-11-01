@@ -1,15 +1,30 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../util/styles/color.dart';
-import '../../../../../util/widgets/portfolio_item.dart';
-import '../../../../../util/widgets/upload_file.dart';
+import '../widgets/portfolio_item.dart';
+import '../widgets/upload_file.dart';
 
 
-
-
-class UploadPortfolio extends StatelessWidget {
+class UploadPortfolio extends StatefulWidget {
   const UploadPortfolio({Key? key}) : super(key: key);
+
+  @override
+  State<UploadPortfolio> createState() => _UploadPortfolioState();
+}
+
+class _UploadPortfolioState extends State<UploadPortfolio> {
+  late JobCubit cubit;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit = JobCubit.get(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,7 @@ class UploadPortfolio extends StatelessWidget {
             Text(
               'Upload Portfolio',
               style: TextStyle(
-                color:AppTheme.neutral9,
+                color: AppTheme.neutral9,
                 fontSize: 16.5.sp,
                 fontFamily: 'SFProDisplay',
                 fontWeight: FontWeight.w500,
@@ -41,6 +56,7 @@ class UploadPortfolio extends StatelessWidget {
               ),
             ),
             SizedBox(height: 3.h,),
+
             Text.rich(
               TextSpan(
                 children: [
@@ -67,14 +83,28 @@ class UploadPortfolio extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 1.h),
+
+            const UploadFile(target: 'CV',),
+
             //SizedBox(height: 1.h),
-            ListView.builder(
-              padding: EdgeInsets.zero,
-                itemCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) =>  CustomPortfolioItem()
+            BlocBuilder<JobCubit, JobState>(
+              builder: (context, state) {
+                return BuildCondition(
+                  condition: cubit.selectedCVFile != null,
+                  builder: (context) =>
+                      CustomPortfolioItem(text: cubit.selectedCVFile!
+                          .path
+                          .split('/')
+                          .last, size: ((cubit.selectedCVFile!.lengthSync())/1024/1024).toStringAsFixed(2),),
+                  fallback: (context) => const SizedBox.shrink(),
+
+                );
+              },
             ),
+
+
+            // ),
 
             SizedBox(height: 2.h,),
 
@@ -90,12 +120,25 @@ class UploadPortfolio extends StatelessWidget {
               ),
             ),
             SizedBox(height: 1.h,),
-            const UploadFile(),
+            const UploadFile(target: 'Other',),
+            BlocBuilder<JobCubit, JobState>(
+              builder: (context, state) {
+                return BuildCondition(
+                  condition: cubit.selectedOtherFile != null,
+                  builder: (context) =>
+                      CustomPortfolioItem(text: cubit.selectedOtherFile!
+                          .path
+                          .split('/')
+                          .last, size: ((cubit.selectedOtherFile!.lengthSync())/1024/1024).toStringAsFixed(2),isImage: true,),
+                  fallback: (context) => const SizedBox.shrink(),
+
+                );
+              },
+            ),
 
 
 
-
-            SizedBox(height: 10.h),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

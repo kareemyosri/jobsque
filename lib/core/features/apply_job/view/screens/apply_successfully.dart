@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/router/app_route.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/app_bar.dart';
@@ -53,7 +54,10 @@ class ApplyJobSuccessfully extends StatelessWidget {
             ),
             Align(
                 alignment: Alignment.bottomCenter,
-                child: CustomElevatedButton(() { }, "Back to home"))
+                child: CustomElevatedButton(() {
+                  Navigator.pushNamedAndRemoveUntil(context, AppRoute.layoutScreen, (route) => false);
+
+                }, "Back to home"))
           ],
         ),
       ),

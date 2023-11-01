@@ -4,8 +4,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
-import '../../../../../util/widgets/portfolio_item.dart';
-import '../../../../../util/widgets/upload_file.dart';
+import '../../../apply_job/view/widgets/portfolio_item.dart';
+import '../../../apply_job/view/widgets/upload_file.dart';
 
 
 class PortfolioScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class PortfolioScreen extends StatelessWidget {
               ),
               SizedBox(height: 2.h),
               //! Dashed Container
-              const UploadFile(),
+              //const UploadFile(),
               SizedBox(height: 1.h),
 
               //! Portfiolos List
@@ -41,7 +41,7 @@ class PortfolioScreen extends StatelessWidget {
                   itemCount: 10,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => const CustomPortfolioItem()),
+                  itemBuilder: (context, index) =>  CustomPortfolioItem(text: 'test', size: '200',)),
 
               SizedBox(height: 2.h),
             ],

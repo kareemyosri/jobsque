@@ -1,10 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.dart';
+import 'package:jobsque/core/features/apply_job/view/screens/apply_successfully.dart';
 import 'package:jobsque/core/features/home/model/job_model.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
 import '../../core/features/apply_job/view/screens/job_details.dart';
+import '../../core/features/apply_job/view/widgets/image_screen.dart';
+import '../../core/features/apply_job/view/widgets/pdf_screen.dart';
 import '../../core/features/create_account/view/screens/location_register_screen.dart';
 import '../../core/features/create_account/view/screens/register_screen.dart';
 import '../../core/features/create_account/view/screens/success_register_screen.dart';
@@ -17,6 +20,7 @@ import '../../core/features/home/view/screens/home_screen.dart';
 import '../../core/features/home_layout/view/screens/layout_app.dart';
 import '../../core/features/login/view/screens/login_screen.dart';
 import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
+import '../../core/features/saved_job/model/favourite_model.dart';
 import '../../core/features/splash/view/screens/splash_screen.dart';
 
 Route? onGenerateRouter(RouteSettings settings){
@@ -55,9 +59,17 @@ Route? onGenerateRouter(RouteSettings settings){
       final args = settings.arguments as JobData;
       return MaterialPageRoute(builder: (_)=>  JobDetails(jobData: args,));
     case AppRoute.applyJobScreen:
-      return MaterialPageRoute(builder: (_)=>  ApplyJob());
+      final args = settings.arguments as JobData;
+      return MaterialPageRoute(builder: (_)=>  ApplyJob(jobData: args,));
+    case AppRoute.applyJobSuccessfullyScreen:
+      return MaterialPageRoute(builder: (_)=>  const ApplyJobSuccessfully());
+    case AppRoute.pdfScreen:
+      return MaterialPageRoute(builder: (_)=>   PDFScreen());
+    case AppRoute.imageScreen:
+      return MaterialPageRoute(builder: (_)=>   const ImageScreen());
 
-    // case AppRoute.registerScreen:
+
+  // case AppRoute.registerScreen:
     //   return MaterialPageRoute(builder: (_)=>  RegisterScreenTask());
     // case AppRoute.loginScreen:
     //   return MaterialPageRoute(builder: (_)=>  LoginScreenTask());

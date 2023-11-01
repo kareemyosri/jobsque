@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/core/features/home/model/job_model.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/color.dart';
-import 'job_feature.dart';
+import '../../../../../util/router/app_route.dart';
+import '../../../../../util/styles/color.dart';
+import '../../../../../util/widgets/job_feature.dart';
+import '../../../saved_job/model/favourite_model.dart';
 
 class SuggestedJobItem extends StatelessWidget {
-  final String jobTitle;
-  final String jobSubTitle;
+  final JobData jobData;
+
   const SuggestedJobItem({super.key,
-    required this.jobTitle,
-    required this.jobSubTitle,
+   required this.jobData,
   });
   @override
   Widget build(BuildContext context) {
@@ -35,9 +37,9 @@ class SuggestedJobItem extends StatelessWidget {
                   color: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
-                child: SvgPicture.asset("assets/images/home/camera.svg")),
+                child: Image.network(jobData.image!)),
             title: Text(
-              jobTitle,
+              jobData.name!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -47,16 +49,36 @@ class SuggestedJobItem extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            subtitle: Text(
-              jobSubTitle,
-              style: TextStyle(
-                color: AppTheme.neutral4,
-                fontSize: 10.sp,
-                fontFamily: 'SFProDisplay',
-                fontWeight: FontWeight.w400,
+            subtitle: Row(
+              children: [
+                Text(
+                  jobData.compName!,
+                  style: TextStyle(
+                    color: AppTheme.neutral4,
+                    fontSize: 10.sp,
+                    fontFamily: 'SFProDisplay',
+                    fontWeight: FontWeight.w400,
 
-              ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    "• ${jobData.location!}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: AppTheme.neutral4,
+                      fontSize: 10.sp,
+                      fontFamily: 'SFProDisplay',
+                      fontWeight: FontWeight.w400,
+
+                    ),
+                  ),
+                ),
+              ],
             ),
+
+
             trailing: IconButton(onPressed: () {  },
               icon: const Icon(Iconsax.archive_minus,color: Colors.white,),
 
@@ -65,14 +87,14 @@ class SuggestedJobItem extends StatelessWidget {
 
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              JobFeature(text: "Full time",color: Colors.white.withOpacity(0.14000000059604645),textColor: Colors.white,),
-              JobFeature(text: "Remote", color: Colors.white.withOpacity(0.14000000059604645),textColor: Colors.white),
-              JobFeature(text: "Senior",color: Colors.white.withOpacity(0.14000000059604645),textColor: Colors.white),
+              JobFeature(text: jobData.jobTimeType!,color: Colors.white.withOpacity(0.14000000059604645),textColor: Colors.white,),
+              SizedBox(width: 2.h,),
+              JobFeature(text: jobData.jobType!,color: Colors.white.withOpacity(0.14000000059604645),textColor: Colors.white),
             ],
           ),
-          SizedBox(height: 2.h,),
+          SizedBox(height: 1.5.h,),
          Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
@@ -80,8 +102,8 @@ class SuggestedJobItem extends StatelessWidget {
                TextSpan(
                  children: [
                    TextSpan(
-                     text: '\$12K-15K',
-                     style: TextStyle(
+                     text: '\$${jobData.salary!}',
+                     style: const TextStyle(
                        color: Colors.white,
                        fontSize: 20,
                        fontFamily: 'SFProDisplay',
@@ -102,7 +124,10 @@ class SuggestedJobItem extends StatelessWidget {
                  ],
                ),
              ),
-             ElevatedButton(onPressed: (){},
+             ElevatedButton(onPressed: (){
+               Navigator.pushNamed(context, AppRoute.jobDetailsScreen,arguments: jobData);
+
+             },
                  style: ElevatedButton.styleFrom(
                    backgroundColor: AppTheme.primary5,
                    padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 8),

@@ -10,7 +10,7 @@ import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/job_status_item.dart';
 import '../widgets/recent_job_item.dart';
 import '../../../../../util/widgets/search_bar.dart';
-import '../../../../../util/widgets/suggested_job_item.dart';
+import '../widgets/suggested_job_item.dart';
 import '../../../notification/view/notification_screen.dart';
 
 
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
               CustomSearchBar(
                   controller: searchController, hintText: "Search...."),
               SizedBox(height: 2.h,),
-              JobStatusItem(title: 'Twitter',
+              const JobStatusItem(title: 'Twitter',
                 subTitle: 'Waiting to be selected by the twitter team',
                 isAccepted: true,),
               SizedBox(height: 2.h,),
@@ -135,17 +135,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
                 ],
               ),
-              SizedBox(
-                height: 200,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) =>
-                    const SuggestedJobItem(jobTitle: 'Product Designer',
-                      jobSubTitle: 'Zoom • United States',),
-                    separatorBuilder: (context, index) => SizedBox(width: 4.w,),
-                    itemCount: 10),
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) {
+                  return BuildCondition(
+                    condition: cubit.recentJobsData.isNotEmpty,
+                    builder: (context) =>
+                        SizedBox(
+                          height: 200,
+                          child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) =>
+                                  SuggestedJobItem(jobData: cubit.suggestJobsData[index],),
+                              separatorBuilder: (context, index) => SizedBox(width: 4.w,),
+                              itemCount: cubit.suggestJobsData.length),
+                        ),
+
+                    fallback: (context) =>
+                    const Center(child: CircularProgressIndicator()),
+                  );
+                },
               ),
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

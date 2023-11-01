@@ -5,15 +5,16 @@ import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/job_details_pepole.dart';
 import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:jobsque/core/features/home/model/job_model.dart';
+import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
-
 
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/job_feature.dart';
+import '../../../saved_job/model/favourite_model.dart';
 import '../widgets/menu_bar.dart';
 import 'job_details_company.dart';
 import 'job_details_description.dart';
@@ -28,6 +29,7 @@ class JobDetails extends StatefulWidget {
 }
 
 class _JobDetailsState extends State<JobDetails> {
+  late HomeCubit homeCubit;
   late JobCubit cubit;
   PageController pageController = PageController();
 
@@ -36,15 +38,62 @@ class _JobDetailsState extends State<JobDetails> {
     // TODO: implement initState
     super.initState();
     cubit = JobCubit.get(context);
+    homeCubit = HomeCubit.get(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Job detail", context,
-          actions: [
-            const Icon(Iconsax.archive_minus5, color: AppTheme.primary5,)
-          ]
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(7.h),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return customAppBar("Job detail", context, actions: [
+              IconButton(onPressed: (){
+                homeCubit.handleFavourite(widget.jobData);
+              }, icon:
+              homeCubit.checkFavourite(widget.jobData.id)?
+              Transform.translate(
+                offset: Offset(1.5.h,0),
+                child: const Icon(
+                  Iconsax.archive_minus5,
+                  color: AppTheme.primary5,
+                ),
+              ):
+              const Icon(
+                Iconsax.archive_minus,
+              )
+              )
+
+            //        GestureDetector(
+            //           onTap: () {
+            //
+            //           },
+            //           child:
+            //           homeCubit.checkFavourite(widget.jobData.id)?
+            //           const Icon(
+            //             Iconsax.archive_minus5,
+            //             color: AppTheme.primary5,
+            //           ):
+            //            const Icon(
+            // Iconsax.archive_minus,
+            // )
+            //
+            //        )
+                  // : Padding(
+                  //     padding: const EdgeInsets.only(right: 12),
+                  //     child: GestureDetector(
+                  //         onTap: () {
+                  //           homeCubit.handleFavourite(
+                  //               widget.jobData);
+                  //         },
+                  //         child: const Icon(
+                  //           Iconsax.archive_minus,
+                  //         )),
+                  //   )
+            ]);
+          },
+        ),
       ),
       body: Stack(
         children: [
@@ -56,8 +105,13 @@ class _JobDetailsState extends State<JobDetails> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.network(
-                      widget.jobData.image!, width: 48, height: 48,),
-                    SizedBox(height: 1.h,),
+                      widget.jobData.image!,
+                      width: 48,
+                      height: 48,
+                    ),
+                    SizedBox(
+                      height: 1.h,
+                    ),
                     Text(
                       widget.jobData.name!,
                       textAlign: TextAlign.center,
@@ -66,12 +120,10 @@ class _JobDetailsState extends State<JobDetails> {
                         fontSize: 16.5.sp,
                         fontFamily: 'SFProDisplay',
                         fontWeight: FontWeight.w500,
-
                       ),
                     ),
                     Text(
-                      '${widget.jobData.compName} • ${widget.jobData
-                          .location} ',
+                      '${widget.jobData.compName} • ${widget.jobData.location} ',
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -80,20 +132,25 @@ class _JobDetailsState extends State<JobDetails> {
                         fontSize: 10.sp,
                         fontFamily: 'SFProDisplay',
                         fontWeight: FontWeight.w400,
-
                       ),
                     ),
-                    SizedBox(height: 2.h,),
+                    SizedBox(
+                      height: 2.h,
+                    ),
                     Row(
-
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        JobFeature(text: widget.jobData.jobTimeType!,),
-                        JobFeature(text: widget.jobData.jobType!,),
+                        JobFeature(
+                          text: widget.jobData.jobTimeType!,
+                        ),
+                        JobFeature(
+                          text: widget.jobData.jobType!,
+                        ),
                       ],
                     ),
-                    SizedBox(height: 4.h,)
-
+                    SizedBox(
+                      height: 4.h,
+                    )
                   ],
                 ),
               ),
@@ -101,20 +158,25 @@ class _JobDetailsState extends State<JobDetails> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: BlocBuilder<JobCubit, JobState>(
                   builder: (context, state) {
-                    return CustomMenuBar(pageController: pageController,);
+                    return CustomMenuBar(
+                      pageController: pageController,
+                    );
                   },
                 ),
               ),
               Expanded(
                 child: PageView(
                   controller: pageController,
-                  physics:const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    JobDetailsDescription(jobData: widget.jobData,),
-                    JobDetailsCompany(jobData: widget.jobData,),
+                    JobDetailsDescription(
+                      jobData: widget.jobData,
+                    ),
+                    JobDetailsCompany(
+                      jobData: widget.jobData,
+                    ),
                     JobDetailsPepole()
-                  ],                  // onPageChanged: (index) {
-
+                  ], // onPageChanged: (index) {
                 ),
               ),
             ],
@@ -122,24 +184,14 @@ class _JobDetailsState extends State<JobDetails> {
           Padding(
             padding: const EdgeInsets.all(24.0),
             child: Align(
-
                 alignment: Alignment.bottomCenter,
                 child: CustomElevatedButton(() {
-                  Navigator.pushNamed(context, AppRoute.applyJobScreen);
+                  Navigator.pushNamed(context, AppRoute.applyJobScreen,
+                      arguments: widget.jobData);
                 }, "Apply now")),
           )
         ],
       ),
     );
   }
-
 }
-
-
-
-
-
-
-
-
-

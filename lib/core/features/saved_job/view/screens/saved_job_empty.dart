@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../util/styles/color.dart';
-import '../../../../util/widgets/app_bar.dart';
+import '../../../../../util/styles/color.dart';
+import '../../../../../util/widgets/app_bar.dart';
+
+
 
 class SavedJobEmptyScreen extends StatelessWidget {
   const SavedJobEmptyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar("Saved",context),
-      body: Center(
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset('assets/images/home/Saved Ilustration.svg'),
             SizedBox(height: 2.h),
-             Text(
+            Text(
               'Nothing has been saved yet',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -29,7 +32,7 @@ class SavedJobEmptyScreen extends StatelessWidget {
 
               ),
             ),
-             Text(
+            Text(
               'Press the star icon on the job you want to save.',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -44,5 +47,6 @@ class SavedJobEmptyScreen extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

@@ -1,7 +1,14 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/util/database/local_database/cache_helper.dart';
 import 'package:jobsque/util/database/remoteDatabase/DioHelper.dart';
+import 'package:jobsque/util/enums.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../util/database/remoteDatabase/endpoints.dart';
@@ -25,8 +32,18 @@ class JobCubit extends Cubit<JobState> {
 
 
     print(currentStep);
-    emit(ChangeStepState());
+    emit(ChangeAddStepState());
   }
+
+  void minusStep(){
+
+    currentStep=currentStep-1;
+
+
+    print(currentStep);
+    emit(ChangeMinusStepState());
+  }
+
   int? selectedChoice;
   // bool isSelected=false ;
 
@@ -43,41 +60,84 @@ class JobCubit extends Cubit<JobState> {
     TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 4,),
   ];
 
+  File? selectedCVFile;
+  File? selectedOtherFile;
+
+
+  Future<void> pickFile(String target) async {
+    emit(PickCVLoading());
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: target == 'CV' ? ['pdf'] : ['jpg', 'png','heic','jpeg','gif','svg'],
+    );
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+
+      if (target == 'CV') {
+        selectedCVFile = file;
+      } else if (target == 'Other') {
+        selectedOtherFile = file;
+      }
+      emit(PickCVSuccess());
+
+
+    } else {
+      emit(PickCVError());
+      return;
+    }
+  }
+
+
+
+
   void applyJob(
-      String cvFile,
       String name,
       String email,
       String mobile,
-      String workType,
-      String otherFile,
       String jobsId,
-      String userId
-      ){
-    emit(ApplyJobLoadingState());
-    DioHelper.PostData(url: applyJobURL,
-        data: {
-      'cv_file':cvFile,
-       'name':name,
-          'email':email,
-          'mobile':mobile,
-          'work_type':workType,
-          'other_file':otherFile,
-          'jobs_id':jobsId,
-          'user_id':userId
-        }
 
-    )
+      ) async {
 
-        .then((value) {
-      print(value.data);
-      emit(ApplyJobSuccessState());
+
+    try {
+
+
+      FormData formData = FormData.fromMap({
+        'cv_file': await MultipartFile.fromFile(selectedCVFile!.path),
+        'name': name,
+        'email': email,
+        'mobile': mobile,
+        'work_type': 'full',
+        'other_file': await MultipartFile.fromFile(selectedOtherFile!.path),
+        'jobs_id': jobsId,
+        'user_id': CashHelper.getString(key: MySharedKeys.userId), // Replace with your user ID
+      });
+      print(formData.length);
+
+      final response = await DioHelper.PostFormData(url: applyJobURL, data: formData);
+
+      if (response.statusCode == 200) {
+        print(response.data);
+        emit(ApplyJobSuccessState());
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        emit(ApplyJobErrorState());
+      }
+    } catch (error) {
+      print(error);
+      emit(ApplyJobErrorState());
     }
-    )
-        .catchError((error){
-          print(error.toString());
-          emit(ApplyJobErrorState());
-    });
   }
+
+
+
+
+
+
+
+
+
 
 
 

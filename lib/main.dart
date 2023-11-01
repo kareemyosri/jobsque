@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:jobsque/core/features/home/view/screens/home_screen.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
+import 'package:jobsque/core/features/saved_job/view_model/favourite_cubit.dart';
 import 'package:jobsque/util/bloc_observer.dart';
 import 'package:jobsque/util/database/local_database/cache_helper.dart';
 import 'package:jobsque/util/database/remoteDatabase/DioHelper.dart';
@@ -61,10 +62,14 @@ class MyApp extends StatelessWidget {
               create: (context) => RegisterCubit(),
             ),
             BlocProvider(
-              create: (context) => HomeCubit()..getAllRecentJobs(),
+              create: (context) => HomeCubit()
+                ..getAllRecentJobs()..getAllSuggestJobs()..getFavouriteJobs(),
             ),
             BlocProvider(
               create: (context) => JobCubit(),
+            ),
+            BlocProvider(
+              create: (context) => FavouriteCubit(),
             ),
 
           ],

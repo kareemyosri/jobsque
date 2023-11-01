@@ -47,8 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
       CashHelper.putString(
           key: MySharedKeys.token, value: LoginCubit.get(context).loginModel?.token)
           .then((value) {
-        print(LoginCubit.get(context).loginModel?.token);
-        Navigator.pushNamedAndRemoveUntil(context, AppRoute.layoutScreen, (route) => false);
+        CashHelper.putString(key: MySharedKeys.userId, value: LoginCubit.get(context).loginModel?.user?.id.toString()).then((value){
+          print(LoginCubit.get(context).loginModel?.user?.id);
+          print(LoginCubit.get(context).loginModel?.token);
+          Navigator.pushNamedAndRemoveUntil(context, AppRoute.layoutScreen, (route) => false);
+        });
+
+
 
       });
     }

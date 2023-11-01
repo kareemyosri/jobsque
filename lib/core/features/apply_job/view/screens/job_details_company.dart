@@ -3,6 +3,7 @@ import 'package:jobsque/core/features/home/model/job_model.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../util/styles/color.dart';
+import '../../../saved_job/model/favourite_model.dart';
 
 
 class JobDetailsCompany extends StatelessWidget{

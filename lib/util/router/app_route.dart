@@ -18,6 +18,9 @@ class AppRoute{
   static const String homeScreen="HomeScreen";
   static const String jobDetailsScreen="JobDetailsScreen";
   static const String applyJobScreen="ApplyJobScreen";
+  static const String applyJobSuccessfullyScreen="applyJobSuccessfullyScreen";
+  static const String pdfScreen="PdfScreen";
+  static const String imageScreen="ImageScreen";
 
 
 

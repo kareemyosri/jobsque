@@ -10,7 +10,7 @@ class DioHelper{
   static init(){
     dio=Dio(
       BaseOptions(
-        baseUrl: 'https://project2.amit-learning.com/api',            //https://newsapi.org/
+        baseUrl: 'https://project2.amit-learning.com/api',
         receiveDataWhenStatusError: true,
         // headers: {
         //   "Content-Type":"application/json"
@@ -43,18 +43,23 @@ class DioHelper{
   static Future<Response> PostData ({
     required String url,
     Map<String, dynamic>? query,
-    required Map<String, dynamic> data,
+     Map<String, dynamic>? data,
+    Map<String, dynamic>? header,
     String? token,
 
   }) async
   {
     token=CashHelper.getString(key: MySharedKeys.token);
 
-    dio.options.headers= {
+     dio.options.headers= {
       "Content-Type":"application/json",
-      "Accept":"application/json",
+
+     "Accept":"application/json",
       'Authorization':"Bearer ${token ?? ""}",
-    };
+     };
+
+
+
 
     return await dio.post(url,
         data: data,
@@ -62,6 +67,35 @@ class DioHelper{
     );
 
   }
+
+
+  static Future<Response> PostFormData ({
+    required String url,
+    Map<String, dynamic>? query,
+    required FormData data,
+    Map<String, dynamic>? header,
+    String? token,
+
+  }) async
+  {
+    token=CashHelper.getString(key: MySharedKeys.token);
+
+    dio.options.headers= {
+
+      'Content-Type': 'multipart/form-data',
+      "Accept":"application/json",
+      'Authorization':"Bearer ${token ?? ""}",
+    };
+
+
+
+    return await dio.post(url,
+        data: data,
+        queryParameters: query
+    );
+
+  }
+
 
   static Future<Response> PutData ({
     required String url,
@@ -83,6 +117,24 @@ class DioHelper{
         queryParameters: query
     );
 
+  }
+
+  static Future<Response> deleteData ({
+    required String url,
+    Map<String, dynamic>? query,
+    String? token,
+  }) async
+  {
+    token=CashHelper.getString(key: MySharedKeys.token);
+    dio.options.headers= {
+      "Content-Type":"application/json",
+      "Accept":"application/json",
+      'Authorization': "Bearer ${token ?? ""}",
+    };
+
+    return await dio.delete(url,
+      queryParameters: query,
+    );
   }
 
 }

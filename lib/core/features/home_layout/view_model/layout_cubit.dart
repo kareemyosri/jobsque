@@ -8,7 +8,7 @@ import '../../applied_job/view/screens/applied_job.dart';
 import '../../home/view/screens/home_screen.dart';
 import '../../messsages_screen/screens/messages_screen.dart';
 import '../../profile/view/screen/profile_screen.dart';
-import '../../saved_job/screens/saved_job_screen.dart';
+import '../../saved_job/view/screens/saved_job_screen.dart';
 
 
 

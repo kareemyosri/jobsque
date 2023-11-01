@@ -23,14 +23,19 @@ class LoginCubit extends Cubit<LoginState> {
     required String password,
   }) {
     emit(LoginLoadingState());
+
     DioHelper.PostData(url: login, data: {
       'email': email,
       "password": password,
 
-    }).then((value) {
+    },
+    // header: {
+    //   "Content-Type":"application/json"
+    // }
+    ).then((value) {
       loginModel = LoginModel.fromJson(value.data);
       //print(loginModel?.token);
-      //print(loginModel?.data?.id);
+      print(loginModel?.user?.id);
       //print(value.data);
       emit(LoginSuccessState());
     }).catchError((error) {

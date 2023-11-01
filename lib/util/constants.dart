@@ -6,6 +6,10 @@ final formKey= GlobalKey<FormState>();
 
 var nameController= TextEditingController();
 //var myCountry= CountryCode(name: "EG",dialCode: "+20");
-var phoneController= TextEditingController();
 
 String? userId="";
+
+//apply job
+TextEditingController usernameController=TextEditingController();
+TextEditingController emailController=TextEditingController();
+TextEditingController phoneController=TextEditingController();
