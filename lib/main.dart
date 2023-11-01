@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.dart';
 import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:jobsque/core/features/home/view/screens/home_screen.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
@@ -75,6 +76,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => SearchCubit(),
             ),
+            // BlocProvider(
+            //   create: (context) => AppliedJobCubit()..getAppliedJobsId(),
+            // ),
 
           ],
           child: MaterialApp(

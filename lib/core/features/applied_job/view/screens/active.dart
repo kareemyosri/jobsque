@@ -1,28 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.dart';
 
-import '../../../../../util/widgets/applied_job_item.dart';
+import '../widgets/applied_job_item.dart';
 import '../../../../../util/widgets/header.dart';
 
 
-class AppliedJobActiveScreen extends StatelessWidget {
+class AppliedJobActiveScreen extends StatefulWidget {
   const AppliedJobActiveScreen({Key? key}) : super(key: key);
 
+  @override
+  State<AppliedJobActiveScreen> createState() => _AppliedJobActiveScreenState();
+}
+
+class _AppliedJobActiveScreenState extends State<AppliedJobActiveScreen> {
+  late AppliedJobCubit cubit;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cubit=AppliedJobCubit.get(context);
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomHeader("3 Jobs"),
+           BlocBuilder<AppliedJobCubit, AppliedJobState>(
+  builder: (context, state) {
+    return CustomHeader("${cubit.appliedJobsData.length} Jobs");
+  },
+),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: ListView.separated(
+            child: BlocBuilder<AppliedJobCubit, AppliedJobState>(
+  builder: (context, state) {
+    return ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context,index)=>
-                    AppliedJobItem(jobTitle: "Senior UI Designer", jobSubTitle: "Twitter • Jakarta, Indonesia "),
+                    AppliedJobItem(jobTitle: "Senior UI Designer", jobSubTitle: "Twitter • Jakarta, Indonesia ", jobData:
+                     cubit.appliedJobsData[index] ,),
                 separatorBuilder: (context,index)=>const Divider(),
-                itemCount: 10),
+                itemCount: cubit.appliedJobsData.length);
+  },
+),
           )
         ],
       ),
