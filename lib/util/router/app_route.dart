@@ -22,7 +22,14 @@ class AppRoute{
   static const String pdfScreen="PdfScreen";
   static const String imageScreen="ImageScreen";
   static const String searchScreen="SearchScreen";
-
+  static const String editDetailsScreen="EditDetailsScreen";
+  static const String portfolioScreen="PortfolioScreen";
+  static const String languageScreen="LanguageScreen";
+  static const String notificationsSettingsScreen="NotificationsSettingsScreen";
+  static const String privacyAndPolicyScreen="PrivacyAndPolicyScreen";
+  static const String helpCenterScreen="HelpCenterScreen";
+  static const String termsAndConditionsScreen="TermsAndConditionsScreen";
+  static const String loginAndSecurityScreen="LoginAndSecurityScreen";
 
 
 

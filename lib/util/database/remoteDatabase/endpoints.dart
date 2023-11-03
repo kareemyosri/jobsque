@@ -7,7 +7,9 @@ const String applyJobURL='/apply';
 const String suggestJobsURL='/jobs/sugest/2';
 const String favouriteJobsURL='/favorites';
 const String searchJobUrl='/jobs/filter';
+const String portofolioUrl='/user/profile/portofolios';
+const String profileUrl='/auth/profile';
+
+const String updateProfileUrl='/auth/user/update';
 
 
-//const String resturant="restaurent";
-//const String food="food";

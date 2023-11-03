@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
+import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
@@ -25,12 +26,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
   late HomeCubit cubit;
+  late ProfileCubit profileCubit;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     cubit = HomeCubit.get(context);
+    profileCubit = ProfileCubit.get(context);
   }
 
   @override
@@ -42,15 +45,25 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hi, Rafif Dian👋',
-                style: TextStyle(
-                  color: AppTheme.neutral9,
-                  fontSize: 20.sp,
-                  fontFamily: 'SFProDisplay',
-                  fontWeight: FontWeight.w500,
+              BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  if(profileCubit.profile.isNotEmpty){
+                    return Text(
+                      '${profileCubit.profile[0].name}👋',
+                      style: TextStyle(
+                        color: AppTheme.neutral9,
+                        fontSize: 20.sp,
+                        fontFamily: 'SFProDisplay',
+                        fontWeight: FontWeight.w500,
 
-                ),
+                      ),
+                    );
+                  }
+                  else{
+                    return const CircularProgressIndicator();
+                  }
+
+                },
               ),
               SizedBox(height: 0.8.h,),
               Text(
@@ -104,11 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               CustomSearchBar(
-                keyboardType: TextInputType.none,
-                onTap: (){
-                  Navigator.pushNamed(context, AppRoute.searchScreen);
-
-                },
+                  keyboardType: TextInputType.none,
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoute.searchScreen);
+                  },
                   controller: searchController, hintText: "Search...."),
               SizedBox(height: 2.h,),
               const JobStatusItem(title: 'Twitter',
@@ -152,8 +164,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemBuilder: (context, index) =>
-                                  SuggestedJobItem(jobData: cubit.suggestJobsData[index],),
-                              separatorBuilder: (context, index) => SizedBox(width: 4.w,),
+                                  SuggestedJobItem(
+                                    jobData: cubit.suggestJobsData[index],),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 4.w,),
                               itemCount: cubit.suggestJobsData.length),
                         ),
 

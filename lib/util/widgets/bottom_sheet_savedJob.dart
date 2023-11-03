@@ -61,9 +61,7 @@ class CustomBottomSheet extends StatelessWidget {
           Column(
             children: items,
           )
-          // const BottomSheetItem('Apply Job', Iconsax.directbox_notif),
-          // const BottomSheetItem('Share via...', Iconsax.export),
-          // const BottomSheetItem('Cancel save', Iconsax.archive_minus),
+
         ],
       ),
     );

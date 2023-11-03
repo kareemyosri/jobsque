@@ -38,10 +38,10 @@ class PortfolioScreen extends StatelessWidget {
 
               //! Portfiolos List
               ListView.builder(
-                  itemCount: 10,
+                  itemCount: 3,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) =>  CustomPortfolioItem(text: 'test', size: '200',)),
+                  itemBuilder: (context, index) =>  const CustomPortfolioItem(text: 'test', size: '200',)),
 
               SizedBox(height: 2.h),
             ],

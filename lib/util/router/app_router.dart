@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_successfully.dart';
 import 'package:jobsque/core/features/home/model/job_model.dart';
+import 'package:jobsque/core/features/profile/view/screen/language_screen.dart';
 import 'package:jobsque/core/features/search/view/screens/search_screen.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
@@ -21,6 +22,13 @@ import '../../core/features/home/view/screens/home_screen.dart';
 import '../../core/features/home_layout/view/screens/layout_app.dart';
 import '../../core/features/login/view/screens/login_screen.dart';
 import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
+import '../../core/features/profile/view/screen/edit_details_screen.dart';
+import '../../core/features/profile/view/screen/help_center_screen.dart';
+import '../../core/features/profile/view/screen/login_security_screen.dart';
+import '../../core/features/profile/view/screen/notification_settings_screen.dart';
+import '../../core/features/profile/view/screen/portfolio_screen.dart';
+import '../../core/features/profile/view/screen/privacy_policy_screen.dart';
+import '../../core/features/profile/view/screen/terms_conditions_screen.dart';
 import '../../core/features/saved_job/model/favourite_model.dart';
 import '../../core/features/splash/view/screens/splash_screen.dart';
 
@@ -72,11 +80,22 @@ Route? onGenerateRouter(RouteSettings settings){
       return MaterialPageRoute(builder: (_)=>    SearchScreen());
 
 
-  // case AppRoute.registerScreen:
-    //   return MaterialPageRoute(builder: (_)=>  RegisterScreenTask());
-    // case AppRoute.loginScreen:
-    //   return MaterialPageRoute(builder: (_)=>  LoginScreenTask());
-
+    case AppRoute.editDetailsScreen:
+      return MaterialPageRoute(builder: (_)=>    EditDetalisScreen());
+    case AppRoute.portfolioScreen:
+      return MaterialPageRoute(builder: (_)=>    const PortfolioScreen());
+    case AppRoute.languageScreen:
+      return MaterialPageRoute(builder: (_)=>    const LanguageScreen());
+    case AppRoute.notificationsSettingsScreen:
+      return MaterialPageRoute(builder: (_)=>    const NotificationsSettingsScreen());
+    case AppRoute.privacyAndPolicyScreen:
+      return MaterialPageRoute(builder: (_)=>    const PrivacyAndPolicyScreen());
+    case AppRoute.helpCenterScreen:
+      return MaterialPageRoute(builder: (_)=>     HelpCenterScreen());
+    case AppRoute.termsAndConditionsScreen:
+      return MaterialPageRoute(builder: (_)=>     const TermsAndConditionsScreen());
+    case AppRoute.loginAndSecurityScreen:
+      return MaterialPageRoute(builder: (_)=>     const LoginAndSecurityScreen());
     default:
       return null;
 
