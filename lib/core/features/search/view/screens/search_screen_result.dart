@@ -5,7 +5,7 @@ import 'package:jobsque/core/features/search/view/screens/search_screen_not_foun
 import 'package:jobsque/core/features/search/view_model/search_cubit.dart';
 import '../../../../../util/widgets/header.dart';
 import '../../../home/view/widgets/recent_job_item.dart';
-import '../../../../../util/widgets/search_filter_drop_down.dart';
+import '../widgets/search_filter_drop_down.dart';
 import '../widgets/filter_body.dart';
 
 class SearchScreenResult extends StatefulWidget {

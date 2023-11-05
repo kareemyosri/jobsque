@@ -25,13 +25,15 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
   TextEditingController();
 
   TextEditingController bioController =
-  TextEditingController(text: "Senior UI/UX Designer");
+  TextEditingController();
 
   TextEditingController addressController =
-  TextEditingController(text: "Ranjingan, Wangon, Wasington City");
+  TextEditingController();
 
   TextEditingController phoneController =
-  TextEditingController(text: "0100-666-7234");
+  TextEditingController();
+  TextEditingController workController =
+  TextEditingController();
   late ProfileCubit cubit;
 
   @override
@@ -40,6 +42,11 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
     super.initState();
     cubit = ProfileCubit.get(context);
     nameController.text = cubit.profile[0].name!;
+    bioController.text=cubit.profileDetails[0].bio!;
+    addressController.text=cubit.profileDetails[0].address!;
+    phoneController.text=cubit.profileDetails[0].mobile!;
+    workController.text=cubit.profileDetails[0].interestedWork!;
+
   }
 
   @override
@@ -123,6 +130,23 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                     height: 2.h,
                   ),
                   Text(
+                    'Interested Work',
+                    style: TextStyle(
+                      color: AppTheme.neutral4,
+                      fontSize: 13.5.sp,
+                      fontFamily: 'SFProDisplay',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 0.5.h,
+                  ),
+                  CustomTextFormField(
+                      controller: workController,
+                      hintText: 'work',
+                      obscureText: false),
+                  SizedBox(height: 2.h,),
+                  Text(
                     'Bio',
                     style: TextStyle(
                       color: AppTheme.neutral4,
@@ -173,6 +197,7 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                     height: 0.5.h,
                   ),
                   CustomPhoneTextFormField(controller: phoneController),
+                  SizedBox(height:10.h),
                 ],
               ),
             ),
@@ -189,6 +214,7 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                     if(state is! UpdateProfileLoading){
                       return CustomElevatedButton(() {
                         cubit.updateProfileNameAndPassword(name: nameController.text, password: CashHelper.getString(key: MySharedKeys.password));
+                        cubit.updateUserData(interestedWork: workController.text, mobile: phoneController.text, address: addressController.text, bio: bioController.text);
                       }, "Save");
                     }
                     else{

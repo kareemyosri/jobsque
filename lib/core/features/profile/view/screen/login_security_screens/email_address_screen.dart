@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/util/database/local_database/cache_helper.dart';
+import 'package:jobsque/util/enums.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -11,7 +13,7 @@ import '../../../../../../util/widgets/app_bar.dart';
 
 class EmailAddressScreen extends StatelessWidget {
    EmailAddressScreen({Key? key}) : super(key: key);
-  TextEditingController emailController=TextEditingController(text: 'rafifdian12@gmail.com');
+  TextEditingController emailController=TextEditingController(text: CashHelper.getString(key: MySharedKeys.email));
 
   @override
   Widget build(BuildContext context) {

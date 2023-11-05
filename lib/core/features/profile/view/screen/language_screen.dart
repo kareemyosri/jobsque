@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Models/languageModel.dart';
+import 'package:jobsque/core/features/profile/model/languageModel.dart';
 
 import '../../../../../util/widgets/app_bar.dart';
-import '../../../../../util/widgets/language_item.dart';
+import '../widgets/language_item.dart';
 
 
 class LanguageScreen extends StatelessWidget {

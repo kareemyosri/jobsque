@@ -27,7 +27,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
     return Column(
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.25,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height * 0.25,
           width: double.infinity,
           child: Stack(
               clipBehavior: Clip.none,
@@ -37,7 +40,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   color: AppTheme.primary1,
                 ),
                 Positioned(
-                    top: 135,
+                    top: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.18,
                     child: Container(
                       width: 90,
                       height: 90,
@@ -73,14 +79,24 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           },
         ),
         SizedBox(height: 0.2.h),
-        Text(
-          'Senior UI/UX Designer',
-          style: TextStyle(
-            color: AppTheme.neutral5,
-            fontSize: 12.sp,
-            fontFamily: 'SFProDisplay',
-            fontWeight: FontWeight.w400,
-          ),
+        BlocBuilder<ProfileCubit, ProfileState>(
+          builder: (context, state) {
+            if (cubit.profileDetails.isNotEmpty){
+              return Text(
+                cubit.profileDetails[0].interestedWork!,
+                style: TextStyle(
+                  color: AppTheme.neutral5,
+                  fontSize: 12.sp,
+                  fontFamily: 'SFProDisplay',
+                  fontWeight: FontWeight.w400,
+                ),
+              );
+            }
+            else {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+          },
         ),
         SizedBox(height: 2.h),
       ],

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/color.dart';
-import 'ElvatedButton.dart';
-import 'job_feature.dart';
+import '../../../../../util/styles/color.dart';
+import '../../../../../util/widgets/ElvatedButton.dart';
+import '../../../../../util/widgets/job_feature.dart';
 
 class FilterDropDownOption extends StatelessWidget {
   final String option;

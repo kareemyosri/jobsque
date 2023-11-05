@@ -3,7 +3,7 @@ import 'package:iconsax/iconsax.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../Models/NotificationSettingsModel.dart';
+import '../../../model/NotificationSettingsModel.dart';
 import '../../../../../../util/styles/color.dart';
 import '../../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../../util/widgets/app_bar.dart';
@@ -50,11 +50,11 @@ class TwoStepVerification2 extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomNotificationsSettingItem(  NotificationSettingsModel(label: 'Secure your account with two-step verification', mode: true),
-              textColor: AppTheme.neutral5,
-              fontSize: 11.5,
-
-            ),
+            // CustomNotificationsSettingItem(  NotificationSettingsModel(label: 'Secure your account with two-step verification', mode: true),
+            //   textColor: AppTheme.neutral5,
+            //   fontSize: 11.5,
+            //
+            // ),
             SizedBox(height: 4.h,),
             Text(
               'Select a verification method',

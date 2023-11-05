@@ -50,13 +50,7 @@ class _TypeOfWorkScreenState extends State<TypeOfWorkScreen> {
             ),
           ),
           SizedBox(height: 3.h,),
-          //   TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 1,),
-          //  SizedBox(height: 2.h,),
-          //   TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 2),
-          // SizedBox(height: 2.h,),
-          //  TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 3,),
-          // SizedBox(height: 2.h,),
-          //  TypeofWorkTile(title: 'Senior UX Designer', subtitle: 'CV  Portfolio.pdf', value: 4,),
+
           Column(
             children: cubit.typeOfWorkTiles,
           ),

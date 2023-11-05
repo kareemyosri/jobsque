@@ -7,6 +7,8 @@ class ProfilePersonalDetails extends StatelessWidget {
   const ProfilePersonalDetails({Key? key}) : super(key: key);
 
   @override
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),

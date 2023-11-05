@@ -1,6 +1,6 @@
 class NotificationSettingsModel {
   final String label;
-  final bool mode;
+    bool mode;
 
   NotificationSettingsModel({required this.label, required this.mode});
 }
@@ -12,6 +12,7 @@ List<NotificationSettingsModel> notificationettings = [
   NotificationSettingsModel(label: 'Jobs You May Be Interested In', mode: true),
   NotificationSettingsModel(label: 'Job Seeker Updates', mode: false),
 ];
+
 List<NotificationSettingsModel> otherNotificationettings = [
   NotificationSettingsModel(label: 'Show Profile', mode: true),
   NotificationSettingsModel(label: 'All Message', mode: true),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../Models/NotificationSettingsModel.dart';
+import '../../model/NotificationSettingsModel.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/header.dart';
 import '../../../../../util/widgets/notification_settings_item.dart';
@@ -23,7 +23,7 @@ class NotificationsSettingsScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: notificationettings.length,
               itemBuilder: (BuildContext context, int index) =>
-                  CustomNotificationsSettingItem(notificationettings[index]),
+                  CustomNotificationsSettingItem(notificationettings[index],index: index,),
               separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
             ),
@@ -35,7 +35,7 @@ class NotificationsSettingsScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: otherNotificationettings.length,
               itemBuilder: (BuildContext context, int index) =>
-                  CustomNotificationsSettingItem(otherNotificationettings[index]),
+                  CustomNotificationsSettingItem(otherNotificationettings[index],index: index,otherNotifications: true,),
               separatorBuilder: (BuildContext context, int index) => const Divider(),
             ),
           ),

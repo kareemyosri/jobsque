@@ -4,6 +4,12 @@ import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.da
 import 'package:jobsque/core/features/apply_job/view/screens/apply_successfully.dart';
 import 'package:jobsque/core/features/home/model/job_model.dart';
 import 'package:jobsque/core/features/profile/view/screen/language_screen.dart';
+import 'package:jobsque/core/features/profile/view/screen/login_security_screens/change_password.dart';
+import 'package:jobsque/core/features/profile/view/screen/login_security_screens/phone_number_screen.dart';
+import 'package:jobsque/core/features/profile/view/screen/login_security_screens/two_step_verification_1.dart';
+import 'package:jobsque/core/features/profile/view/screen/login_security_screens/two_step_verification_2.dart';
+import 'package:jobsque/core/features/profile/view/screen/login_security_screens/two_step_verification_3.dart';
+import 'package:jobsque/core/features/profile/view/screen/login_security_screens/two_step_verification_4.dart';
 import 'package:jobsque/core/features/search/view/screens/search_screen.dart';
 import 'package:jobsque/util/router/app_route.dart';
 
@@ -25,6 +31,7 @@ import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
 import '../../core/features/profile/view/screen/edit_details_screen.dart';
 import '../../core/features/profile/view/screen/help_center_screen.dart';
 import '../../core/features/profile/view/screen/login_security_screen.dart';
+import '../../core/features/profile/view/screen/login_security_screens/email_address_screen.dart';
 import '../../core/features/profile/view/screen/notification_settings_screen.dart';
 import '../../core/features/profile/view/screen/portfolio_screen.dart';
 import '../../core/features/profile/view/screen/privacy_policy_screen.dart';
@@ -96,6 +103,20 @@ Route? onGenerateRouter(RouteSettings settings){
       return MaterialPageRoute(builder: (_)=>     const TermsAndConditionsScreen());
     case AppRoute.loginAndSecurityScreen:
       return MaterialPageRoute(builder: (_)=>     const LoginAndSecurityScreen());
+    case AppRoute.emailAddressScreen:
+      return MaterialPageRoute(builder: (_)=>      EmailAddressScreen());
+    case AppRoute.phoneNumberScreen:
+      return MaterialPageRoute(builder: (_)=>      PhoneNumberScreen());
+    case AppRoute.changePasswordScreen:
+      return MaterialPageRoute(builder: (_)=>      ChangePasswordScreen());
+    case AppRoute.twoStepVerification1:
+      return MaterialPageRoute(builder: (_)=>      TwoStepVerification1());
+    case AppRoute.twoStepVerification2:
+      return MaterialPageRoute(builder: (_)=>      TwoStepVerification2());
+    case AppRoute.twoStepVerification3:
+      return MaterialPageRoute(builder: (_)=>      TwoStepVerification3());
+    case AppRoute.twoStepVerification4:
+      return MaterialPageRoute(builder: (_)=>      TwoStepVerification4());
     default:
       return null;
 

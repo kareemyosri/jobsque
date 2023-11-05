@@ -26,4 +26,13 @@ class UpdateProfileDetailsLoading extends ProfileState {}
 class UpdateProfileDetailsError extends ProfileState {}
 class UpdateProfileDetailsSuccessfully extends ProfileState {}
 
-
+// change language
+class ChangeSelectedChoiceState extends ProfileState {}
+// notification settings change
+class ChangeSettingsItemeState extends ProfileState {}
+// change password suffix icon
+class ChangeIconState extends ProfileState {}
+// change password error color
+class ChangeColorIndexState extends ProfileState {}
+class ChangeSecondColorIndexState extends ProfileState {}
+class ChangeThirdColorIndexState extends ProfileState {}

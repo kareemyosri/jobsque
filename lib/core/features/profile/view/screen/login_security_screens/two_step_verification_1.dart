@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../Models/NotificationSettingsModel.dart';
+import '../../../model/NotificationSettingsModel.dart';
 import '../../../../../../util/styles/color.dart';
 import '../../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../../util/widgets/app_bar.dart';
@@ -24,11 +24,11 @@ class TwoStepVerification1 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            CustomNotificationsSettingItem(  NotificationSettingsModel(label: 'Secure your account with two-step verification', mode: false),
-              textColor: AppTheme.neutral5,
-              fontSize: 11.5,
-
-            ),
+            // CustomNotificationsSettingItem(  NotificationSettingsModel(label: 'Secure your account with two-step verification', mode: false),
+            //   textColor: AppTheme.neutral5,
+            //   fontSize: 11.5,
+            //
+            // ),
             SizedBox(height: 4.h,),
             const TwoStepVerificationTile(icon: Iconsax.sms, text: "Two-step verification provides additional security by asking for a verification code every time you log in on another device."),
             SizedBox(height: 2.h,),

@@ -30,6 +30,13 @@ class AppRoute{
   static const String helpCenterScreen="HelpCenterScreen";
   static const String termsAndConditionsScreen="TermsAndConditionsScreen";
   static const String loginAndSecurityScreen="LoginAndSecurityScreen";
+  static const String emailAddressScreen="EmailAddressScreen";
+  static const String phoneNumberScreen="PhoneNumberScreen";
+  static const String changePasswordScreen="ChangePasswordScreen";
+  static const String twoStepVerification1="TwoStepVerification1";
+  static const String twoStepVerification2="TwoStepVerification2";
+  static const String twoStepVerification3="TwoStepVerification3";
+  static const String twoStepVerification4="TwoStepVerification4";
 
 
 

@@ -51,6 +51,8 @@ class GeneralDataListTile extends StatelessWidget {
             icon: Iconsax.lock,
              onTap: (){
               Navigator.pushNamed(context, AppRoute.loginAndSecurityScreen);
+              // Navigator.of(context).pushNamed(AppRoute.loginAndSecurityScreen,)
+              // Navigator.of(context).push(route)
              },
           ),
           SizedBox(height: 2.h),

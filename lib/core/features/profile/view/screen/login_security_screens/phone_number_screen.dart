@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../Models/NotificationSettingsModel.dart';
+import '../../../model/NotificationSettingsModel.dart';
 import '../../../../../../util/styles/color.dart';
 import '../../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../../util/widgets/app_bar.dart';
@@ -37,11 +37,11 @@ class PhoneNumberScreen extends StatelessWidget {
             SizedBox(height: 1.h,),
             CustomPhoneTextFormField(controller: phoneController,),
             SizedBox(height: 2.h,),
-            CustomNotificationsSettingItem(  NotificationSettingsModel(label: 'Use the phone number to reset your password', mode: true),
-            textColor: AppTheme.neutral5,
-              fontSize: 11.5,
-
-            ),
+            // CustomNotificationsSettingItem(  NotificationSettingsModel(label: 'Use the phone number to reset your password', mode: true),
+            // textColor: AppTheme.neutral5,
+            //   fontSize: 11.5,
+            //
+            // ),
             const Spacer(),
             CustomElevatedButton(() { }, "Save"),
 
