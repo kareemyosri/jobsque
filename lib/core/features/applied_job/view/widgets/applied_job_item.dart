@@ -12,9 +12,8 @@ import '../../../../../util/widgets/job_feature.dart';
 import '../../../home/view_model/home_cubit.dart';
 
 class AppliedJobItem extends StatefulWidget {
-    const AppliedJobItem({Key? key, required this.jobTitle, required this.jobSubTitle, required this.jobData}) : super(key: key);
-  final String jobTitle;
-  final String jobSubTitle;
+    const AppliedJobItem({Key? key, required this.jobData}) : super(key: key);
+
   final JobData jobData;
 
   @override

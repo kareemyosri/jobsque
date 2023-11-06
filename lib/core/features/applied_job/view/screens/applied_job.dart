@@ -4,6 +4,7 @@ import 'package:jobsque/core/features/applied_job/view/screens/active.dart';
 import 'package:jobsque/core/features/applied_job/view/screens/rejected.dart';
 import 'package:jobsque/core/features/applied_job/view/widgets/menu_bar.dart';
 import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.dart';
+import '../../../../../util/animations/slide_transition_animation.dart';
 import '../../../../../util/widgets/app_bar.dart';
 
 
@@ -37,7 +38,6 @@ class _AppliedJobBodyScreenState extends State<AppliedJobBodyScreen> {
     // TODO: implement initState
     super.initState();
     cubit = AppliedJobCubit.get(context);
-   // cubit = BlocProvider.of<AppliedJobCubit>(context);
 
   }
 

@@ -40,7 +40,7 @@ class _AppliedJobActiveScreenState extends State<AppliedJobActiveScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context,index)=>
-                    AppliedJobItem(jobTitle: "Senior UI Designer", jobSubTitle: "Twitter • Jakarta, Indonesia ", jobData:
+                    AppliedJobItem( jobData:
                      cubit.appliedJobsData[index] ,),
                 separatorBuilder: (context,index)=>const Divider(),
                 itemCount: cubit.appliedJobsData.length);

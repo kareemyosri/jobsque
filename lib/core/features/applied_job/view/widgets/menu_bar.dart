@@ -41,7 +41,7 @@ class _MenuBarAppliedJobState extends State<MenuBarAppliedJob> {
               onTap: () {
                 cubit.changeIndex(0);
 
-                  widget.pageController.animateToPage(0, duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
+                  widget.pageController.animateToPage(0, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
 
               },
               child: Container(
@@ -79,7 +79,7 @@ class _MenuBarAppliedJobState extends State<MenuBarAppliedJob> {
               borderRadius: const BorderRadius.all(Radius.circular(25.0)),
               onTap: () {
                   cubit.changeIndex(1);
-                  widget.pageController.animateToPage(1, duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
+                  widget.pageController.animateToPage(1, duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
 
 
               },
