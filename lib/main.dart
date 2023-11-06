@@ -6,6 +6,7 @@ import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.d
 import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
 import 'package:jobsque/core/features/home/view/screens/home_screen.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
+import 'package:jobsque/core/features/onboarding/view_model/onboarding_cubit.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
 import 'package:jobsque/core/features/saved_job/view_model/favourite_cubit.dart';
 import 'package:jobsque/core/features/search/view_model/search_cubit.dart';
@@ -79,6 +80,9 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => ProfileCubit()..getProfileDetailsAndPortfolios()..getProfileNameAndEmail(),
+            ),
+            BlocProvider(
+              create: (context) => OnboardingCubit(),
             ),
             // BlocProvider(
             //   create: (context) => AppliedJobCubit()..getAppliedJobsId(),

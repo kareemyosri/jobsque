@@ -97,8 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Center(
                   child: IconButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => const NotificationScreen()));
+
+                    Navigator.pushNamed(context, AppRoute.notificationScreen);
                   },
                       icon: const Icon(Iconsax.notification)
                   ),

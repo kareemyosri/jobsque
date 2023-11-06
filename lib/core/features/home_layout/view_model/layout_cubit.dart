@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:meta/meta.dart';
 
+import '../../../../util/animations/slide_transition_animation.dart';
 import '../../applied_job/view/screens/applied_job.dart';
 import '../../home/view/screens/home_screen.dart';
 import '../../messsages_screen/screens/messages_screen.dart';
@@ -19,6 +20,7 @@ class LayoutCubit extends Cubit<LayoutState> {
   static LayoutCubit get(context) => BlocProvider.of(context);
   int currentIndex=0;
   List<Widget> screens =  [
+
     HomeScreen(),
     MessagesScreen(),
     const AppliedJobScreen(),

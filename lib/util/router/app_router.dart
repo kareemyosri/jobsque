@@ -27,6 +27,7 @@ import '../../core/features/forgot_password/view/screens/success_ForgotPassword_
 import '../../core/features/home/view/screens/home_screen.dart';
 import '../../core/features/home_layout/view/screens/layout_app.dart';
 import '../../core/features/login/view/screens/login_screen.dart';
+import '../../core/features/notification/view/notification_screen.dart';
 import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
 import '../../core/features/profile/view/screen/edit_details_screen.dart';
 import '../../core/features/profile/view/screen/help_center_screen.dart';
@@ -38,57 +39,97 @@ import '../../core/features/profile/view/screen/privacy_policy_screen.dart';
 import '../../core/features/profile/view/screen/terms_conditions_screen.dart';
 import '../../core/features/saved_job/model/favourite_model.dart';
 import '../../core/features/splash/view/screens/splash_screen.dart';
+import '../animations/page_slide_transition.dart';
 
 Route? onGenerateRouter(RouteSettings settings){
   switch(settings.name){
     case AppRoute.splashScreen:
       return MaterialPageRoute(builder: (_)=> const SplashScreen());
     case AppRoute.onBoardingScreen:
-      return MaterialPageRoute(builder: (_)=>  const OnboardingScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const OnboardingScreen());
+      //return MaterialPageRoute(builder: (_)=>  const OnboardingScreen());
 
     case AppRoute.loginScreen:
-      return MaterialPageRoute(builder: (_)=>  const LoginScreen());
+     // return MaterialPageRoute(builder: (_)=>  const LoginScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const LoginScreen());
+
 
     case AppRoute.forgetPasswordScreen  :
-      return MaterialPageRoute(builder: (_)=>  const ForgotPasswordScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const ForgotPasswordScreen());
+
+      //return MaterialPageRoute(builder: (_)=>  const ForgotPasswordScreen());
     case AppRoute.checkEmailForgetPasswordScreen  :
-      return MaterialPageRoute(builder: (_)=>  const CheckMailForgotPasswordScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const CheckMailForgotPasswordScreen());
+
+     // return MaterialPageRoute(builder: (_)=>  const CheckMailForgotPasswordScreen());
     case AppRoute.createNewPasswordScreen  :
-      return MaterialPageRoute(builder: (_)=>   const CreateNewPassword());
+      return PageSlideTransition(direction: AxisDirection.left, page: const CreateNewPassword());
+
+      //return MaterialPageRoute(builder: (_)=>   const CreateNewPassword());
     case AppRoute.successForgetPasswordScreen  :
-      return MaterialPageRoute(builder: (_)=>   const SuccessForgotPasswordScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const SuccessForgotPasswordScreen());
+
+     // return MaterialPageRoute(builder: (_)=>   const SuccessForgotPasswordScreen());
 
     case AppRoute.registerScreen:
-      return MaterialPageRoute(builder: (_)=>  const RegisterScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const RegisterScreen());
+
+     // return MaterialPageRoute(builder: (_)=>  const RegisterScreen());
     case AppRoute.registerWorkScreen:
-      return MaterialPageRoute(builder: (_)=>  const RegisterWorkScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const RegisterWorkScreen());
+
+     // return MaterialPageRoute(builder: (_)=>  const RegisterWorkScreen());
     case AppRoute.locationRegisterScreen:
-      return MaterialPageRoute(builder: (_)=>  const LocationRegisterScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const LocationRegisterScreen());
+
+      //return MaterialPageRoute(builder: (_)=>  const LocationRegisterScreen());
     case AppRoute.successRegisterScreen:
-      return MaterialPageRoute(builder: (_)=>  const SuccessRegisterScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const SuccessRegisterScreen());
+
+     // return MaterialPageRoute(builder: (_)=>  const SuccessRegisterScreen());
 
     case AppRoute.layoutScreen:
-      return MaterialPageRoute(builder: (_)=>  const LayoutScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page: const LayoutScreen());
+
+      //return MaterialPageRoute(builder: (_)=>  const LayoutScreen());
     case AppRoute.homeScreen:
-      return MaterialPageRoute(builder: (_)=>  HomeScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page:  HomeScreen());
+    case AppRoute.notificationScreen:
+      return PageSlideTransition(direction: AxisDirection.right, page:  const NotificationScreen());
+
+     // return MaterialPageRoute(builder: (_)=>  HomeScreen());
     case AppRoute.jobDetailsScreen:
       final args = settings.arguments as JobData;
-      return MaterialPageRoute(builder: (_)=>  JobDetails(jobData: args,));
+      return PageSlideTransition(direction: AxisDirection.right, page:  JobDetails(jobData: args,));
+
+     // return MaterialPageRoute(builder: (_)=>  JobDetails(jobData: args,));
     case AppRoute.applyJobScreen:
       final args = settings.arguments as JobData;
-      return MaterialPageRoute(builder: (_)=>  ApplyJob(jobData: args,));
+      return PageSlideTransition(direction: AxisDirection.right, page:  ApplyJob(jobData: args,));
+
+      //return MaterialPageRoute(builder: (_)=>  ApplyJob(jobData: args,));
     case AppRoute.applyJobSuccessfullyScreen:
-      return MaterialPageRoute(builder: (_)=>  const ApplyJobSuccessfully());
+      return PageSlideTransition(direction: AxisDirection.right, page:const  ApplyJobSuccessfully());
+
+    //  return MaterialPageRoute(builder: (_)=>  const ApplyJobSuccessfully());
     case AppRoute.pdfScreen:
-      return MaterialPageRoute(builder: (_)=>   PDFScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page:  PDFScreen());
+
+     // return MaterialPageRoute(builder: (_)=>   PDFScreen());
     case AppRoute.imageScreen:
-      return MaterialPageRoute(builder: (_)=>   const ImageScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page:  ImageScreen());
+
+     // return MaterialPageRoute(builder: (_)=>   const ImageScreen());
     case AppRoute.searchScreen:
-      return MaterialPageRoute(builder: (_)=>    SearchScreen());
+      return PageSlideTransition(direction: AxisDirection.right, page:  SearchScreen());
+
+    //  return MaterialPageRoute(builder: (_)=>    SearchScreen());
 
 
     case AppRoute.editDetailsScreen:
-      return MaterialPageRoute(builder: (_)=>    EditDetalisScreen());
+      return PageSlideTransition(direction: AxisDirection.left, page:  EditDetalisScreen());
+
+     // return MaterialPageRoute(builder: (_)=>    EditDetalisScreen());
     case AppRoute.portfolioScreen:
       return MaterialPageRoute(builder: (_)=>    const PortfolioScreen());
     case AppRoute.languageScreen:
