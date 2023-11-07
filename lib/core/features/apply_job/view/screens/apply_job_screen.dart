@@ -1,3 +1,4 @@
+import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -141,20 +142,29 @@ class _FormStepsState extends State<ApplyJob> {
                   }
                 },
                 builder: (context, state) {
-                  return CustomElevatedButton(() {
-                    if (cubit.currentStep < 2) {
-                     if(formKey.currentState!.validate()){
-                       cubit.addStep();
+                  if(state is! ApplyJobLoadingState){
+                    return CustomElevatedButton(() {
+                      if (cubit.currentStep < 2) {
+                        if(formKey.currentState!.validate()){
+                          cubit.addStep();
 
-                       _pageController.animateToPage(cubit.currentStep,
-                           duration: const Duration(milliseconds: 500),
-                           curve: Curves.decelerate);
-                     }
-                    } else {
+                          _pageController.animateToPage(cubit.currentStep,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.decelerate);
+                        }
+                      } else {
+                        if(cubit.selectedCVFile!=null && cubit.selectedOtherFile!=null ){
+                          cubit.applyJob(usernameController.text, emailController.text, phoneController.text, widget.jobData.id.toString());
+                        }
 
-                      cubit.applyJob(usernameController.text, emailController.text, phoneController.text, widget.jobData.id.toString());
-                    }
-                  }, cubit.currentStep < 2 ? 'Next' : 'Submit');
+                      }
+                    }, cubit.currentStep < 2 ? 'Next' : 'Submit');
+                  }
+                  else{
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+
                 },
               ),
             ),

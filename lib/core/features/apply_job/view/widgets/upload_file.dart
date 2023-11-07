@@ -71,7 +71,7 @@ class _UploadFileState extends State<UploadFile> {
               ),
               SizedBox(height: 1.h),
               Text(
-                'Max. file size 10 MB',
+                'Max. file size 1 MB',
                 style: TextStyle(
                   color: AppTheme.neutral5,
                   fontSize: 10.sp,

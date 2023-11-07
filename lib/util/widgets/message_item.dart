@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Models/messageModel.dart';
+import 'package:jobsque/core/features/messsages_screen/model/messageModel.dart';
 import 'package:sizer/sizer.dart';
 
 import '../styles/color.dart';

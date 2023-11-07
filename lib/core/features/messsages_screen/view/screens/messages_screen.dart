@@ -3,13 +3,15 @@ import 'package:iconsax/iconsax.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../../Models/messageModel.dart';
-import '../../../../util/styles/color.dart';
-import '../../../../util/widgets/app_bar.dart';
-import '../../../../util/widgets/bottom_sheet_item.dart';
-import '../../../../util/widgets/bottom_sheet_savedJob.dart';
-import '../../../../util/widgets/message_item.dart';
-import '../../../../util/widgets/search_bar.dart';
+import '../../../../../util/styles/color.dart';
+import '../../../../../util/widgets/app_bar.dart';
+import '../../../../../util/widgets/bottom_sheet_item.dart';
+import '../../../../../util/widgets/bottom_sheet_savedJob.dart';
+import '../../../../../util/widgets/message_item.dart';
+import '../../../../../util/widgets/search_bar.dart';
+import '../../model/messageModel.dart';
+
+
 
 
 class MessagesScreen extends StatelessWidget {

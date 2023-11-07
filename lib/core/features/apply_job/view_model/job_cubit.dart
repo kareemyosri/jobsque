@@ -101,6 +101,8 @@ class JobCubit extends Cubit<JobState> {
 
 
     try {
+      emit(ApplyJobLoadingState());
+
 
 
       FormData formData = FormData.fromMap({

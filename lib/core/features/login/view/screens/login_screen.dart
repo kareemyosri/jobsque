@@ -114,7 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (!isValid) {
                         return "please enter right email";
                       }
-                      return null;
+                      else{
+                        return null;
+                      }
+
                     },
                     hintText: "Email",
                     keyboardType: TextInputType.name,
@@ -128,6 +131,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 1.5.h,),
                 CustomTextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Password must be at least 8 characters';
+                    }
+                    if (value.length < 8) {
+
+
+                      return 'Password must be at least 8 characters';
+                    }
+
+                    else{
+                      return null;
+                    }
+                  },
                   controller: passwordController,
                   hintText: "Password",
                   prefixIcon: const Icon(Iconsax.lock),
@@ -229,9 +246,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 2.h,),
                 CustomElevatedButton(
                         () {
-                          cubit.userLogin(email: usernameController.text, password: passwordController.text);
-                          CashHelper.putString(key: MySharedKeys.email, value: usernameController.text);
-                          CashHelper.putString(key: MySharedKeys.password, value: passwordController.text);
+                          if(formKey.currentState!.validate()){
+                            cubit.userLogin(email: usernameController.text, password: passwordController.text);
+                            CashHelper.putString(key: MySharedKeys.email, value: usernameController.text);
+                            CashHelper.putString(key: MySharedKeys.password, value: passwordController.text);
+                          }
+
                         },
 
                     "Login"),
@@ -280,13 +300,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Expanded(child: CustomSocialButton("assets/images/icons/Facebook.png", () { }, "Facebook")),
                   ],
                 ),
-                // Center(
-                //   child: Column(
-                //     children: [
-                //       homeIndicator(context)
-                //     ],
-                //   ),
-                // ),
+
 
 
               ],
@@ -294,9 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-      // bottomNavigationBar: FractionallySizedBox(
-      //     widthFactor: 0.36,
-      //     child: homeIndicator(context)),
+
 
     );
   },

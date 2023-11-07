@@ -6,7 +6,6 @@ import 'package:jobsque/core/features/saved_job/view/screens/saved_job_empty.dar
 import 'package:jobsque/util/widgets/app_bar.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../Models/savedJobItemModel.dart';
 import '../../../../../util/widgets/header.dart';
 import '../widgets/saved_job_item.dart';
 

@@ -15,7 +15,7 @@ class ApplyJobSuccessfully extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Apply Job", context),
+      appBar: customAppBar("Apply Job", context,leading: false),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Stack(

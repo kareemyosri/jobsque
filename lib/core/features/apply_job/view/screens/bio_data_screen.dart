@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/util/widgets/TextFormField.dart';
@@ -119,12 +120,14 @@ class BioDataScreen extends StatelessWidget {
             SizedBox(height: 1.h,),
             CustomTextFormField(
               validator: (value){
-                if(value!.isEmpty){
-                  return'cannot be empty';
+                if (value == null || value.isEmpty) {
+                  return 'email must not be empty';
                 }
-                else{
-                  return null;
+                final bool isValid = EmailValidator.validate(value);
+                if (!isValid) {
+                  return "please enter right email";
                 }
+                return null;
               },
               controller: emailController,
               hintText: "Email",
@@ -170,6 +173,12 @@ class BioDataScreen extends StatelessWidget {
                   if(value!.isEmpty){
                     return'cannot be empty';
                   }
+                  if (value.length < 10) {
+
+
+                    return 'Phone must be 11 characters';
+                  }
+
                   else{
                     return null;
                   }

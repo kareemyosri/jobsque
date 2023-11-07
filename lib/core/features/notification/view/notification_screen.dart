@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobsque/Models/notificationModel.dart';
+import 'package:jobsque/core/features/notification/model/notificationModel.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../util/widgets/app_bar.dart';
