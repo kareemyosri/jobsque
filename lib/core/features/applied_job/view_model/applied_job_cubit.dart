@@ -35,7 +35,12 @@ changeIndex(index){
 
       appliedJobsData.add(JobData.fromJson(value.data['data']));
 
-      emit(GetAppliedJobsSuccessfully());
+      if (appliedJobsData.isEmpty) {
+        emit(AppliedJobEmpty());
+      } else {
+        emit(GetAppliedJobsSuccessfully());
+      }
+
     })
         .catchError((error) {
       print(error.toString());
@@ -45,7 +50,7 @@ changeIndex(index){
 
   void getAppliedJobsId(){
 
-    emit(GetAppliedJobsLoading());
+    emit(GetAppliedJobsIDLoading());
     DioHelper.getData(url: '$applyJobURL/${CashHelper.getString(key: MySharedKeys.userId)}')
         .then((value) {
       for (var job in value.data['data']) {
@@ -53,11 +58,11 @@ changeIndex(index){
         getAppliedJobs(jobId: id);
       }
 
-      emit(GetAppliedJobsSuccessfully());
+      emit(GetAppliedJobsIDSuccessfully());
     })
         .catchError((error) {
       print(error.toString());
-      emit(GetAppliedJobsError());
+      emit(GetAppliedJobsIDError());
     });
 
   }

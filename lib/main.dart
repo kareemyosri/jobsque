@@ -14,6 +14,9 @@ import 'package:jobsque/util/bloc_observer.dart';
 import 'package:jobsque/util/database/local_database/cache_helper.dart';
 import 'package:jobsque/util/database/remoteDatabase/DioHelper.dart';
 import 'package:jobsque/util/router/app_router.dart';
+import 'package:jobsque/util/shimmer/shimmer_applied_list_view.dart';
+import 'package:jobsque/util/shimmer/shimmer_job_list_view_item.dart';
+import 'package:jobsque/util/shimmer/shimmer_suggested_job.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -99,7 +102,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            //home: LayoutScreen(),
+            //home: ShimmerAppliedListView(),
             onGenerateRoute: onGenerateRouter,
 
           ),

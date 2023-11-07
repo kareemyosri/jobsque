@@ -8,6 +8,9 @@ import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/shimmer/shimmer_container_effect.dart';
+import '../../../../../util/shimmer/shimmer_recently_jobs_list_view.dart';
+import '../../../../../util/shimmer/shimmer_suggested_job.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/job_status_item.dart';
 import '../widgets/recent_job_item.dart';
@@ -60,7 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
                   else{
-                    return const CircularProgressIndicator();
+                    return ShimmerContainerEffect(
+                      height: 1.2.h,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                    );
                   }
 
                 },
@@ -172,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
 
                     fallback: (context) =>
-                    const Center(child: CircularProgressIndicator()),
+                    const ShimmerSuggestedJob(),
                   );
                 },
               ),
@@ -220,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: cubit.recentJobsData.length),
 
                     fallback: (context) =>
-                    const Center(child: CircularProgressIndicator()),
+                    const ShimmerRecentlyListView(),
                   );
                 },
               ),

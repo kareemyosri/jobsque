@@ -15,6 +15,23 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit() : super(SearchInitial());
 static SearchCubit get(context)=>BlocProvider.of(context);
 
+  List<String> recentSearches = [
+    'Junior UI Designer',
+    'Junior UX Designer',
+    'Product Designer',
+    'Project Manager',
+    'UI/UX Designer',
+    'Front-End Developer',
+  ];
+
+  List<String> popularSearches = [
+    'UI/UX Designer',
+    'Project Manager',
+    'Product Designer',
+    'UX Designer',
+    'Front-End Developer',
+  ];
+
 
   bool isSearching = false;
   late String searchKey;

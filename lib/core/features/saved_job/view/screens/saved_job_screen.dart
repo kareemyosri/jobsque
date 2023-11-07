@@ -29,7 +29,7 @@ class _SavedJobScreenState extends State<SavedJobScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar('Saved', context),
+      appBar: customAppBar('Saved', context,leading: false),
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return BuildCondition(

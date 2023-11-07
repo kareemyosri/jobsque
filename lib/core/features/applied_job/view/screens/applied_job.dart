@@ -4,6 +4,7 @@ import 'package:jobsque/core/features/applied_job/view/screens/active.dart';
 import 'package:jobsque/core/features/applied_job/view/screens/rejected.dart';
 import 'package:jobsque/core/features/applied_job/view/widgets/menu_bar.dart';
 import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.dart';
+import 'package:jobsque/util/router/app_route.dart';
 import '../../../../../util/animations/slide_transition_animation.dart';
 import '../../../../../util/widgets/app_bar.dart';
 
@@ -44,7 +45,7 @@ class _AppliedJobBodyScreenState extends State<AppliedJobBodyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Applied Job", context),
+      appBar: customAppBar("Applied Job", context,leading: false),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

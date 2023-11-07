@@ -6,13 +6,11 @@ import 'package:sizer/sizer.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/header.dart';
-import '../widgets/counter.dart';
 import '../widgets/general_data.dart';
 import '../widgets/others_data.dart';
 import '../widgets/personal_details.dart';
 import '../widgets/profile_header.dart';
-import '../widgets/profile_tile.dart';
-import '../widgets/user_about.dart';
+
 
 
 class ProfileScreen extends StatefulWidget {
@@ -35,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: customAppBar(
-        'Profile',context,
+        'Profile',context,leading: false,
         actions: [
           IconButton(
             onPressed: () {},

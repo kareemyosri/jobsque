@@ -18,7 +18,7 @@ TextEditingController searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("Messages", context),
+      appBar: customAppBar("Messages", context,leading: false),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(

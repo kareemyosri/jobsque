@@ -4,9 +4,13 @@ import 'package:sizer/sizer.dart';
 
 import '../styles/color.dart';
 
-AppBar customAppBar(String title,context,{List<Widget>? actions,Color? backgroundColor}) {
+AppBar customAppBar(String title,context,{List<Widget>? actions,Color? backgroundColor,bool? leading=true}) {
   return AppBar(
-    leading:  IconButton(onPressed: () { Navigator.pop(context); }, icon: const Icon(Iconsax.arrow_left),),
+    leading: leading!?  IconButton(onPressed:
+       () { Navigator.pop(context); },
+
+
+      icon: const Icon(Iconsax.arrow_left),) : const SizedBox.shrink()  ,
     actions: actions,
     backgroundColor: backgroundColor ,
     title: Text(title,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/search/view/screens/search_screen_not_found.dart';
 import 'package:jobsque/core/features/search/view_model/search_cubit.dart';
+import '../../../../../util/shimmer/shimmer_recently_jobs_list_view.dart';
 import '../../../../../util/widgets/header.dart';
 import '../../../home/view/widgets/recent_job_item.dart';
 import '../widgets/search_filter_drop_down.dart';
@@ -78,9 +79,11 @@ class _SearchScreenResultState extends State<SearchScreenResult> {
                 ],
               );
             }
-            return const Center(
-              child: CircularProgressIndicator(),
+            return const Padding(
+              padding: EdgeInsets.all(24.0),
+              child: ShimmerRecentlyListView(),
             );
+
           },
         )
       ],
