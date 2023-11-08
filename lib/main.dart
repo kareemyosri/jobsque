@@ -2,9 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.dart';
 import 'package:jobsque/core/features/apply_job/view_model/job_cubit.dart';
-import 'package:jobsque/core/features/home/view/screens/home_screen.dart';
 import 'package:jobsque/core/features/home/view_model/home_cubit.dart';
 import 'package:jobsque/core/features/onboarding/view_model/onboarding_cubit.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
@@ -14,9 +12,7 @@ import 'package:jobsque/util/bloc_observer.dart';
 import 'package:jobsque/util/database/local_database/cache_helper.dart';
 import 'package:jobsque/util/database/remoteDatabase/DioHelper.dart';
 import 'package:jobsque/util/router/app_router.dart';
-import 'package:jobsque/util/shimmer/shimmer_applied_list_view.dart';
-import 'package:jobsque/util/shimmer/shimmer_job_list_view_item.dart';
-import 'package:jobsque/util/shimmer/shimmer_suggested_job.dart';
+
 
 import 'package:sizer/sizer.dart';
 
@@ -82,7 +78,9 @@ class MyApp extends StatelessWidget {
               create: (context) => SearchCubit(),
             ),
             BlocProvider(
-              create: (context) => ProfileCubit()..getProfileDetailsAndPortfolios()..getProfileNameAndEmail(),
+              create: (context) => ProfileCubit()
+                ..getProfileDetailsAndPortfolios()..getProfileNameAndEmail()
+
             ),
             BlocProvider(
               create: (context) => OnboardingCubit(),

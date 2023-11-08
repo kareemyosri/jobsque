@@ -36,3 +36,22 @@ class ChangeIconState extends ProfileState {}
 class ChangeColorIndexState extends ProfileState {}
 class ChangeSecondColorIndexState extends ProfileState {}
 class ChangeThirdColorIndexState extends ProfileState {}
+
+
+class AddCVLoadingState extends ProfileState {}
+class AddCVErrorState extends ProfileState {}
+class AddCVSuccessState extends ProfileState {}
+//pick portofolio
+class PickCVLoading extends ProfileState {}
+class PickCVError extends ProfileState {}
+class PickCVSuccess extends ProfileState {}
+
+//pick profile image
+class PickImageLoading extends ProfileState {}
+class PickImageError extends ProfileState {}
+class PickImageSuccess extends ProfileState {}
+class OldImageDeleted extends ProfileState {}
+
+class GetImageLoading extends ProfileState {}
+class GetImageError extends ProfileState {}
+class GetImageSuccess extends ProfileState {}

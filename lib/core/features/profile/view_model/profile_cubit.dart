@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jobsque/util/database/remoteDatabase/endpoints.dart';
 import 'package:meta/meta.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../util/database/remoteDatabase/DioHelper.dart';
 import '../model/NotificationSettingsModel.dart';
@@ -12,6 +17,9 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState>  {
   ProfileCubit() : super(ProfileInitial());
+
+
+
   static ProfileCubit get(context)=>BlocProvider.of(context);
 
 List<Portfolio> portfolios=[];
@@ -168,4 +176,147 @@ List<ProfileData> profile=[];
   }
 
 
+  File? selectedCVFile;
+  File? selectedOtherFile;
+
+
+  Future<void> pickFile(String target) async {
+    emit(PickCVLoading());
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: target == 'CV' ? ['pdf'] : ['jpg', 'png','heic','jpeg','gif','svg'],
+    );
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+
+      if (target == 'CV') {
+        selectedCVFile = file;
+      } else if (target == 'Other') {
+        selectedOtherFile = file;
+      }
+      emit(PickCVSuccess());
+
+
+    } else {
+      emit(PickCVError());
+      return;
+    }
+  }
+
+
+
+   File? savedImage;
+
+
+
+
+  Future<void> pickAndSaveProfileImage() async {
+    final ImagePicker picker = ImagePicker();
+       emit(PickImageLoading());
+
+
+    try {
+      final XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
+
+      if (imageFile == null) {
+        emit(PickImageError());
+
+        // User canceled image selection
+        return;
+      }
+
+      // Get the application documents directory where you want to save the image.
+      final Directory directory = await getApplicationDocumentsDirectory();
+
+      final String imagePath = '${directory.path}/profile_image.png';
+     // final String imagePath = '${_appDirectory.path}/profile_image.png';
+
+      print(' from picked $imagePath');
+
+      // Check if the old image exists and delete it.
+      final File oldImage = File(imagePath);
+      if (await oldImage.exists()) {
+
+        await oldImage.delete();
+       // emit(OldImageDeleted());
+
+      }
+
+      // Move the selected image to the desired location.
+      //final File newImage = File(imageFile.path);
+      savedImage = await File(imageFile.path).copy(imagePath);
+
+      emit(PickImageSuccess());
+
+    } catch (e) {
+      print("Error picking and saving image: $e");
+      emit(PickImageError());
+    }
+  }
+
+  Future<void> loadSavedProfileImage() async {
+    emit(GetImageLoading());
+
+    try {
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final String imagePath = '${directory.path}/profile_image.png';
+      //final String imagePath = '${_appDirectory.path}/profile_image.png';
+
+      print(' from device load $imagePath');
+
+        savedImage = File(imagePath);
+
+      if (await savedImage!.exists()) {
+        emit(GetImageSuccess());
+      }
+      else{
+        emit(GetImageError());
+
+      }
+    } catch (e) {
+      print("Error loading saved profile image: $e");
+      emit(GetImageError());
+
+    }
+  }
 }
+
+
+
+
+// void addPortofolio(
+  //
+  //     ) async {
+  //
+  //
+  //   try {
+  //     emit(AddCVLoadingState());
+  //
+  //
+  //
+  //     FormData formData = FormData.fromMap({
+  //       'cv_file': await MultipartFile.fromFile(selectedCVFile!.path),
+  //
+  //       'image': await MultipartFile.fromFile(selectedCVFile!.path),
+  //
+  //     });
+  //
+  //
+  //     final response = await DioHelper.PostFormData(url: portofolioUrl, data: formData);
+  //
+  //     if (response.statusCode == 200) {
+  //       print(response.data);
+  //       emit(AddCVSuccessState());
+  //     } else {
+  //       print('Request failed with status: ${response.statusCode}');
+  //       emit(AddCVErrorState());
+  //     }
+  //   } catch (error) {
+  //     print(error);
+  //     emit(AddCVErrorState());
+  //   }
+  // }
+
+
+

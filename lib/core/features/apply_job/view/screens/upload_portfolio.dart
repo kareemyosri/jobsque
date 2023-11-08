@@ -96,7 +96,7 @@ class _UploadPortfolioState extends State<UploadPortfolio> {
                       CustomPortfolioItem(text: cubit.selectedCVFile!
                           .path
                           .split('/')
-                          .last, size: ((cubit.selectedCVFile!.lengthSync())/1024/1024).toStringAsFixed(2),),
+                          .last, size: ((cubit.selectedCVFile!.lengthSync())/1024/1024).toStringAsFixed(2), selectedFile: cubit.selectedCVFile!,),
                   fallback: (context) => const SizedBox.shrink(),
 
                 );
@@ -129,7 +129,7 @@ class _UploadPortfolioState extends State<UploadPortfolio> {
                       CustomPortfolioItem(text: cubit.selectedOtherFile!
                           .path
                           .split('/')
-                          .last, size: ((cubit.selectedOtherFile!.lengthSync())/1024/1024).toStringAsFixed(2),isImage: true,),
+                          .last, size: ((cubit.selectedOtherFile!.lengthSync())/1024/1024).toStringAsFixed(2),isImage: true, selectedFile: cubit.selectedOtherFile!,),
                   fallback: (context) => const SizedBox.shrink(),
 
                 );

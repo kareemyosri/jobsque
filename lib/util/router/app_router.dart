@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_successfully.dart';
@@ -29,6 +31,7 @@ import '../../core/features/home_layout/view/screens/layout_app.dart';
 import '../../core/features/login/view/screens/login_screen.dart';
 import '../../core/features/notification/view/notification_screen.dart';
 import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
+import '../../core/features/profile/model/pdf_args.dart';
 import '../../core/features/profile/view/screen/edit_details_screen.dart';
 import '../../core/features/profile/view/screen/help_center_screen.dart';
 import '../../core/features/profile/view/screen/login_security_screen.dart';
@@ -98,7 +101,9 @@ Route? onGenerateRouter(RouteSettings settings){
       return PageSlideTransition(direction: AxisDirection.right, page:const  ApplyJobSuccessfully());
 
     case AppRoute.pdfScreen:
-      return PageSlideTransition(direction: AxisDirection.left, page:  PDFScreen());
+      final args = settings.arguments as PdfScreenArguments;
+
+      return PageSlideTransition(direction: AxisDirection.left, page:  PDFScreen(text: args.text, selectedCV: args.file,));
 
     case AppRoute.imageScreen:
       return PageSlideTransition(direction: AxisDirection.left, page:  ImageScreen());

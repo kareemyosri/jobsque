@@ -21,19 +21,14 @@ class EditDetalisScreen extends StatefulWidget {
 }
 
 class _EditDetalisScreenState extends State<EditDetalisScreen> {
-  TextEditingController nameController =
-  TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
-  TextEditingController bioController =
-  TextEditingController();
+  TextEditingController bioController = TextEditingController();
 
-  TextEditingController addressController =
-  TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
-  TextEditingController phoneController =
-  TextEditingController();
-  TextEditingController workController =
-  TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController workController = TextEditingController();
   late ProfileCubit cubit;
 
   @override
@@ -42,11 +37,10 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
     super.initState();
     cubit = ProfileCubit.get(context);
     nameController.text = cubit.profile[0].name!;
-    bioController.text=cubit.profileDetails[0].bio!;
-    addressController.text=cubit.profileDetails[0].address!;
-    phoneController.text=cubit.profileDetails[0].mobile!;
-    workController.text=cubit.profileDetails[0].interestedWork!;
-
+    bioController.text = cubit.profileDetails[0].bio??'';
+    addressController.text = cubit.profileDetails[0].address!;
+    phoneController.text = cubit.profileDetails[0].mobile??'';
+    workController.text = cubit.profileDetails[0].interestedWork!;
   }
 
   @override
@@ -67,20 +61,39 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                         Stack(
                           alignment: Alignment.center,
                           children: [
-                            Container(
-                              width: 24.5.w,
-                              height: 11.5.h,
-                              decoration: const ShapeDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTZClNi2dGGXiI5K7tZaMrc2CT6Ysy5zmeBXaORUA7dz2ZNFYeR"),
-                                  fit: BoxFit.fill,
-                                ),
-                                shape: OvalBorder(
-                                  side:
-                                  BorderSide(width: 2, color: Colors.white),
-                                ),
-                              ),
+                            BlocBuilder<ProfileCubit, ProfileState>(
+                              builder: (context, state) {
+                                if(state is PickImageLoading){
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                                else{
+                                  return InkWell(
+                                    onTap: () {
+                                      cubit.pickAndSaveProfileImage();
+                                    },
+                                    child: Container(
+                                      width: 24.5.w,
+                                      height: 11.5.h,
+                                      decoration:  ShapeDecoration(
+                                        image: cubit.savedImage != null
+                                            ? DecorationImage(
+                                          image: FileImage(cubit.savedImage!),
+                                          fit: BoxFit.fill,
+                                        )
+                                            : const DecorationImage(
+                                          image: NetworkImage(
+                                              "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTZClNi2dGGXiI5K7tZaMrc2CT6Ysy5zmeBXaORUA7dz2ZNFYeR"),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        shape: const OvalBorder(
+                                          side: BorderSide(width: 2, color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                              },
                             ),
                             const Icon(
                               Iconsax.camera,
@@ -145,7 +158,9 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                       controller: workController,
                       hintText: 'work',
                       obscureText: false),
-                  SizedBox(height: 2.h,),
+                  SizedBox(
+                    height: 2.h,
+                  ),
                   Text(
                     'Bio',
                     style: TextStyle(
@@ -197,7 +212,7 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                     height: 0.5.h,
                   ),
                   CustomPhoneTextFormField(controller: phoneController),
-                  SizedBox(height:10.h),
+                  SizedBox(height: 10.h),
                 ],
               ),
             ),
@@ -206,18 +221,24 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                 child: BlocConsumer<ProfileCubit, ProfileState>(
                   listener: (context, state) {
                     // TODO: implement listener
-                    if(state is UpdateProfileSuccessfully){
+                    if (state is UpdateProfileSuccessfully) {
                       Navigator.pop(context);
                     }
                   },
                   builder: (context, state) {
-                    if(state is! UpdateProfileLoading){
+                    if (state is! UpdateProfileLoading) {
                       return CustomElevatedButton(() {
-                        cubit.updateProfileNameAndPassword(name: nameController.text, password: CashHelper.getString(key: MySharedKeys.password));
-                        cubit.updateUserData(interestedWork: workController.text, mobile: phoneController.text, address: addressController.text, bio: bioController.text);
+                        cubit.updateProfileNameAndPassword(
+                            name: nameController.text,
+                            password: CashHelper.getString(
+                                key: MySharedKeys.password));
+                        cubit.updateUserData(
+                            interestedWork: workController.text,
+                            mobile: phoneController.text,
+                            address: addressController.text,
+                            bio: bioController.text);
                       }, "Save");
-                    }
-                    else{
+                    } else {
                       return const Center(child: CircularProgressIndicator());
                     }
                   },

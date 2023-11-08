@@ -10,6 +10,7 @@ import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/animations/slide_transition_animation.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/app_bar.dart';
@@ -65,32 +66,6 @@ class _JobDetailsState extends State<JobDetails> {
               )
               )
 
-            //        GestureDetector(
-            //           onTap: () {
-            //
-            //           },
-            //           child:
-            //           homeCubit.checkFavourite(widget.jobData.id)?
-            //           const Icon(
-            //             Iconsax.archive_minus5,
-            //             color: AppTheme.primary5,
-            //           ):
-            //            const Icon(
-            // Iconsax.archive_minus,
-            // )
-            //
-            //        )
-                  // : Padding(
-                  //     padding: const EdgeInsets.only(right: 12),
-                  //     child: GestureDetector(
-                  //         onTap: () {
-                  //           homeCubit.handleFavourite(
-                  //               widget.jobData);
-                  //         },
-                  //         child: const Icon(
-                  //           Iconsax.archive_minus,
-                  //         )),
-                  //   )
             ]);
           },
         ),
@@ -169,13 +144,18 @@ class _JobDetailsState extends State<JobDetails> {
                   controller: pageController,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    JobDetailsDescription(
-                      jobData: widget.jobData,
-                    ),
-                    JobDetailsCompany(
-                      jobData: widget.jobData,
-                    ),
-                    JobDetailsPepole()
+                    SlideTransitionAnimation(duration: const Duration(seconds:1), begin:  const Offset(0.2, 0), end: Offset.zero,
+                      child: JobDetailsDescription(
+                        jobData: widget.jobData,
+                      ),),
+                    SlideTransitionAnimation(duration: const Duration(seconds:1), begin:  const Offset(0.2, 0), end: Offset.zero,
+                      child:  JobDetailsCompany(
+                        jobData: widget.jobData,
+                      ),),
+
+                    SlideTransitionAnimation(duration: const Duration(seconds:1), begin:  const Offset(0.2, 0), end: Offset.zero,
+                      child: JobDetailsPepole(),),
+
                   ], // onPageChanged: (index) {
                 ),
               ),

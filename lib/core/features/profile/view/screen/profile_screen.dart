@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/animations/slide_transition_animation.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/header.dart';
@@ -26,7 +27,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit=ProfileCubit.get(context);
+    cubit=ProfileCubit.get(context)
+
+      ..loadSavedProfileImage();
   }
   @override
   Widget build(BuildContext context) {
@@ -48,8 +51,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const ProfileHeader(),
-            const ProfilePersonalDetails(),
+
+
+
+          const SlideTransitionAnimation(duration: Duration(seconds:1), begin:  Offset(0, 0.2), end: Offset.zero,
+            child:  ProfileHeader(),),
+            const SlideTransitionAnimation(duration: Duration(seconds:1), begin:  Offset(0, 0.2), end: Offset.zero,
+                child:  ProfilePersonalDetails()),
+
             const CustomHeader('General'),
              SizedBox(height: 1.h,),
             const GeneralDataListTile(),

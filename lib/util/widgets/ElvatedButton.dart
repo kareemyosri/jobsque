@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../animations/slide_transition_animation.dart';
 import '../styles/color.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -22,14 +23,17 @@ class CustomElevatedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(1000), // <-- Radius
           ),
         ),
-          child:Text(text,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontFamily: 'SFProDisplay',
-            fontWeight: FontWeight.w500,
-          ),
-          ),
+          child:
+          SlideTransitionAnimation(duration: const Duration(seconds:1), begin:  const Offset(0.7, 0), end: Offset.zero,
+            child: Text(text,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'SFProDisplay',
+                fontWeight: FontWeight.w500,
+              ),
+            ),)
+
 
       ),
     );
