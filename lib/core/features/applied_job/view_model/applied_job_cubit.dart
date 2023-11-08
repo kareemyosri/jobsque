@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/core/features/applied_job/model/applied_job_model.dart';
@@ -39,7 +40,7 @@ changeIndex(index){
         emit(AppliedJobEmpty());
       } else {
         emit(GetAppliedJobsSuccessfully());
-      }
+     }
 
     })
         .catchError((error) {
@@ -53,12 +54,24 @@ changeIndex(index){
     emit(GetAppliedJobsIDLoading());
     DioHelper.getData(url: '$applyJobURL/${CashHelper.getString(key: MySharedKeys.userId)}')
         .then((value) {
-      for (var job in value.data['data']) {
-       String id= AppliedJobData.fromJson(job).jobsId.toString();
-        getAppliedJobs(jobId: id);
+      if(value.data['data'].isEmpty){
+        emit(AppliedJobEmpty());
+       // print('yes');
+
+      }
+      else{
+        for (var job in value.data['data']) {
+          String id= AppliedJobData.fromJson(job).jobsId.toString();
+          getAppliedJobs(jobId: id);
+        }
+        emit(GetAppliedJobsIDSuccessfully());
+
       }
 
-      emit(GetAppliedJobsIDSuccessfully());
+
+
+
+
     })
         .catchError((error) {
       print(error.toString());

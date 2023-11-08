@@ -14,6 +14,7 @@ import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/Line.dart';
 import '../../../../../util/widgets/SocialButton.dart';
 import '../../../../../util/widgets/TextFormField.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 import '../../view_model/login_cubit.dart';
 
 
@@ -56,6 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
       });
+
+      showSuccessSnackBar(context: context, message: 'Logged Successfully');
+    }
+    if(state is LoginErrorState){
+
+
+      showErrorSnackBar(context: context, message: 'Please Try again');
     }
   },
   builder: (context, state) {

@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../../util/router/app_route.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 import '../../model/country_model.dart';
 import '../widgets/country.dart';
 import '../../view_model/register_cubit.dart';
@@ -101,8 +102,14 @@ class _LocationRegisterScreenState extends State<LocationRegisterScreen> {
                   child: BlocConsumer<RegisterCubit, RegisterState>(
                     listener: (context, state) {
                       if(state is DataSuccessfullyState){
+                        showSuccessSnackBar(context: context, message: 'User Data setup Successfully');
+
                         //hint: cache data registered to true
                         Navigator.pushNamed(context, AppRoute.successRegisterScreen);
+                      }
+                      else if(state is DataErrorState){
+                        showErrorSnackBar(context: context, message: 'There is something went wrong.Try Again');
+
                       }
                     },
                     builder: (context, state) {

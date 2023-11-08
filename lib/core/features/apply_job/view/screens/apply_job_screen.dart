@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 import '../../../saved_job/model/favourite_model.dart';
 import '../widgets/stepper_indicator.dart';
 
@@ -137,9 +138,16 @@ class _FormStepsState extends State<ApplyJob> {
               child: BlocConsumer<JobCubit, JobState>(
                 listener: (context, state){
                   if(state is ApplyJobSuccessState){
+                    showSuccessSnackBar(context: context, message: 'Job Applied Successfully');
+
                     Navigator.pushNamed(context, AppRoute.applyJobSuccessfullyScreen);
                     cubit.currentStep = 0;
                   }
+                  else if(state is ApplyJobErrorState){
+                    showErrorSnackBar(context: context, message: 'There is something went wrong.Please Check You Selected Your CV and Other File');
+
+                  }
+
                 },
                 builder: (context, state) {
                   if(state is! ApplyJobLoadingState){
@@ -153,9 +161,9 @@ class _FormStepsState extends State<ApplyJob> {
                               curve: Curves.decelerate);
                         }
                       } else {
-                        if(cubit.selectedCVFile!=null && cubit.selectedOtherFile!=null ){
-                          cubit.applyJob(usernameController.text, emailController.text, phoneController.text, widget.jobData.id.toString());
-                        }
+                        cubit.applyJob(usernameController.text, emailController.text, phoneController.text, widget.jobData.id.toString());
+
+
 
                       }
                     }, cubit.currentStep < 2 ? 'Next' : 'Submit');

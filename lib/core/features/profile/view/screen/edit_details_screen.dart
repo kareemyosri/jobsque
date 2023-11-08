@@ -12,6 +12,7 @@ import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../util/widgets/TextFormField.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/phone_textFormField.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 
 class EditDetalisScreen extends StatefulWidget {
   EditDetalisScreen({Key? key}) : super(key: key);
@@ -61,7 +62,19 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                         Stack(
                           alignment: Alignment.center,
                           children: [
-                            BlocBuilder<ProfileCubit, ProfileState>(
+                            BlocConsumer<ProfileCubit, ProfileState>(
+                              listener: (context,state){
+                                if(state is PickImageSuccess){
+                                  showSuccessSnackBar(context: context, message: 'Profile Image Updated Successfully');
+
+                                }
+                                else if(state is PickImageError){
+                                  if(state is PickImageSuccess){
+                                    showErrorSnackBar(context: context, message: 'There is something went wrong. Try Again');
+
+                                  }
+                                }
+                              },
                               builder: (context, state) {
                                 if(state is PickImageLoading){
                                   return const Center(child: CircularProgressIndicator());
@@ -222,7 +235,12 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                   listener: (context, state) {
                     // TODO: implement listener
                     if (state is UpdateProfileSuccessfully) {
+                      showSuccessSnackBar(context: context, message: 'Profile Updated Successfully');
+
                       Navigator.pop(context);
+                    }
+                    else if (state is UpdateProfileError){
+                      showErrorSnackBar(context: context, message: 'There is something went Wrong. Try Again');
                     }
                   },
                   builder: (context, state) {

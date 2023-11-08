@@ -5,7 +5,6 @@ import 'package:jobsque/core/features/applied_job/view/screens/applied_not_found
 import 'package:jobsque/core/features/applied_job/view_model/applied_job_cubit.dart';
 
 import '../../../../../util/shimmer/shimmer_applied_list_view.dart';
-import '../../../search/view/screens/search_screen_not_found.dart';
 import '../widgets/applied_job_item.dart';
 import '../../../../../util/widgets/header.dart';
 
@@ -54,7 +53,7 @@ class _AppliedJobActiveScreenState extends State<AppliedJobActiveScreen> {
                       separatorBuilder: (context, index) => const Divider(),
                       itemCount: cubit.appliedJobsData.length);
                 }
-                else{
+                else {
                   return const ShimmerAppliedListView();
 
                 }

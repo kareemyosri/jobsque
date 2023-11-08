@@ -10,6 +10,7 @@ import '../../../../../../util/styles/color.dart';
 import '../../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../../util/widgets/TextFormField.dart';
 import '../../../../../../util/widgets/app_bar.dart';
+import '../../../../../../util/widgets/snack_bar.dart';
 import '../../../view_model/profile_cubit.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -144,7 +145,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         return CustomTextFormField(
                           validator: (value) {
                             cubit.password = value!;
-                            if (value!.isEmpty) {
+                            if (value.isEmpty) {
                               cubit.changeColorIndex(0);
                               return 'Password must be at least 8 characters';
                             }
@@ -252,7 +253,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 child: BlocConsumer<ProfileCubit, ProfileState>(
                   listener: (context, state) {
                     if (state is UpdateProfileSuccessfully) {
+                      showSuccessSnackBar(context: context, message: 'Password Updated Successfully');
+
                       Navigator.pop(context);
+                    }
+                    else if(state is UpdateProfileError){
+                      showErrorSnackBar(context: context, message: 'There is something went wrong.Try Again');
+
                     }
                   },
                   builder: (context, state) {

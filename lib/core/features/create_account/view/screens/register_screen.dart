@@ -13,6 +13,7 @@ import '../../../../../util/widgets/Line.dart';
 import '../../../../../util/widgets/SocialButton.dart';
 import '../../../../../util/widgets/TextFormField.dart';
 import '../../../../../util/widgets/home_indicator.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 import '../../view_model/register_cubit.dart';
 
 
@@ -50,8 +51,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         // TODO: implement listener
         if (state is RegisterSuccessState) {
+          showSuccessSnackBar(context: context, message: 'Registered Successfully');
+
           Navigator.pushNamedAndRemoveUntil(
               context, AppRoute.registerWorkScreen, (route) => false);
+        }
+       else if (state is RegisterErrorState) {
+          showErrorSnackBar(context: context, message: 'There is something went wrong.Try Again');
+
         }
       },
       child: Scaffold(

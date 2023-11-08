@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
+import 'package:jobsque/util/database/local_database/cache_helper.dart';
+import 'package:jobsque/util/enums.dart';
+import 'package:jobsque/util/router/app_route.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../util/animations/slide_transition_animation.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/header.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 import '../widgets/general_data.dart';
 import '../widgets/others_data.dart';
 import '../widgets/personal_details.dart';
@@ -39,7 +43,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         'Profile',context,leading: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              CashHelper.removeCacheKey(key: MySharedKeys.token).then((value) {
+                Navigator.pushNamedAndRemoveUntil(context, AppRoute.loginScreen, (route) => false);
+                showSuccessSnackBar(context: context, message: 'Logged out Successfully');
+
+              });
+
+            },
             icon: const Icon(
               Iconsax.logout_1,
               color: Colors.red,
