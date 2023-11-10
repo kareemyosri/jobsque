@@ -5,6 +5,8 @@ import 'package:jobsque/core/features/onboarding/view_model/onboarding_cubit.dar
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../../util/database/local_database/cache_helper.dart';
+import '../../../../../util/enums.dart';
 import '../../../../../util/router/app_route.dart';
 import '../../../../../util/widgets/ElvatedButton.dart';
 import '../../model/onborading_model.dart';
@@ -51,6 +53,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       body: Column(
         children: [
+
           Expanded(
             child: PageView.builder(
               controller: cubit.controller,
@@ -66,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SmoothPageIndicator(
               controller: cubit.controller, // PageController
-              count: 3,
+              count: OnboardingModel.boardingData.length,
               effect: const SwapEffect(
                 type: SwapType.yRotation,
                 dotWidth: 8,
@@ -84,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               builder: (context, state) {
                 return CustomElevatedButton(() {
                   if (cubit.show) {
-                    //CashHelper.putBool(key: MySharedKeys.onboarding, value: true);
+                    CashHelper.putString(key: MySharedKeys.onboarding, value: 'true');
                     Navigator.pushNamedAndRemoveUntil(
                         context, AppRoute.loginScreen, (route) => false);
                   }

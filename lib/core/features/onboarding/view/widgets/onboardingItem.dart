@@ -25,13 +25,8 @@ class BoardingItem extends StatelessWidget {
           SlideTransitionAnimation(duration: const Duration(seconds: 1), begin:  const Offset(0.1, 0), end: Offset.zero,
             child:  Padding(
               padding:  const EdgeInsets.fromLTRB(24, 24, 24, 0),
-              child: Text(model.title, style:   TextStyle(
-                fontSize: 27.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily:'SFProDisplay',
-                color: AppTheme.neutral9,
-              ),//maxLines: 2,
-              ),
+              child: model.title
+
             ),),
 
           SizedBox(height: 0.5.h,),

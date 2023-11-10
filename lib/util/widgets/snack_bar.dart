@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 void showSuccessSnackBar({required BuildContext context, required String message}) {
   ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-    ..showSnackBar(
+    .showSnackBar(
         SnackBar(
           content: AwesomeSnackbarContent(
+
             title: 'Success!',
             message: message,
             contentType: ContentType.success,

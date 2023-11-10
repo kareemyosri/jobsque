@@ -52,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
           print(LoginCubit.get(context).loginModel?.user?.id);
           print(LoginCubit.get(context).loginModel?.token);
           Navigator.pushNamedAndRemoveUntil(context, AppRoute.layoutScreen, (route) => false);
+          CashHelper.putString(key: MySharedKeys.rememberMe, value: '${cubit.isChecked}');
         });
 
 

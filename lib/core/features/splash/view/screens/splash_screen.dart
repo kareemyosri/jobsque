@@ -3,6 +3,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jobsque/util/database/local_database/cache_helper.dart';
+import 'package:jobsque/util/enums.dart';
 
 import '../../../../../util/animations/scale_transition_animation.dart';
 import '../../../../../util/router/app_route.dart';
@@ -24,9 +26,26 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer (const Duration(milliseconds: 1300),
         (){
+      final token=CashHelper.getString(key: MySharedKeys.token);
+      final onBoarding=CashHelper.getString(key: MySharedKeys.onboarding);
+      final rememberMe=CashHelper.getString(key: MySharedKeys.rememberMe);
 
-          Navigator.pushNamedAndRemoveUntil(context, AppRoute.onBoardingScreen, (route) => false);
-        }
+
+      if(token!.isNotEmpty && rememberMe=='true'){
+            Navigator.pushNamedAndRemoveUntil(context, AppRoute.layoutScreen, (route) => false);
+
+          }
+          else if(token!.isNotEmpty && rememberMe=='false'){
+            Navigator.pushNamedAndRemoveUntil(context, AppRoute.loginScreen, (route) => false);
+          }
+          else if(token!.isEmpty && onBoarding=='true'){
+            Navigator.pushNamedAndRemoveUntil(context, AppRoute.loginScreen, (route) => false);
+          }
+          else{
+            Navigator.pushNamedAndRemoveUntil(context, AppRoute.onBoardingScreen, (route) => false);
+
+          }
+    }
     );
   }
   @override

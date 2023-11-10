@@ -1,14 +1,92 @@
+import 'package:flutter/material.dart';
+import 'package:jobsque/util/styles/color.dart';
+import 'package:sizer/sizer.dart';
+
 class OnboardingModel {
   String image;
-  String title;
+  Text title;
   String body;
 
   OnboardingModel(this.image, this.title, this.body);
 
   static List<OnboardingModel> boardingData=[
-    OnboardingModel("assets/images/onboarding/Background.svg"  , "Find a job, and start building your career from now on", "Explore over 25,924 available job roles and upgrade your operator now."),
-    OnboardingModel("assets/images/onboarding/Background22.svg", "Hundreds of jobs are waiting for you to join together", "Immediately join us and start applying for the job you are interested in."),
-    OnboardingModel("assets/images/onboarding/Background (2).svg", "Get the best choice for the job you've always dreamed of", "The better the skills you have, the greater the good job opportunities for you."),
+    OnboardingModel("assets/images/onboarding/Background.svg"  ,
+  Text.rich(
+  TextSpan(
+  children: [
+  TextSpan(text: "Find a job, and ", style:TextStyle(
+    fontSize: 27.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily:'SFProDisplay',
+    color: AppTheme.neutral9,
+  )),
+  TextSpan(text: "start building ", style: TextStyle(
+    fontSize: 27.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily:'SFProDisplay',
+    color: AppTheme.primary5,
+  )),
+    TextSpan(text: " your career from now on", style:TextStyle(
+      fontSize: 27.sp,
+      fontWeight: FontWeight.w500,
+      fontFamily:'SFProDisplay',
+      color: AppTheme.neutral9,
+    )),
+  ],
+  ),
+  ),
+
+        "Explore over 25,924 available job roles and upgrade your operator now."),
+    OnboardingModel("assets/images/onboarding/Background22.svg",
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(text: "Hundreds of jobs are waiting for you to  ", style:TextStyle(
+                fontSize: 27.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily:'SFProDisplay',
+                color: AppTheme.neutral9,
+              )),
+              TextSpan(text: "join together ", style: TextStyle(
+                fontSize: 27.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily:'SFProDisplay',
+                color: AppTheme.primary5,
+              )),
+            ],
+          ),
+        ),
+
+
+        "Immediately join us and start applying for the job you are interested in."),
+
+    OnboardingModel("assets/images/onboarding/Background (2).svg",
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(text: "Get the best ", style:TextStyle(
+                fontSize: 27.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily:'SFProDisplay',
+                color: AppTheme.neutral9,
+              )),
+              TextSpan(text: "choice for the job ", style: TextStyle(
+                fontSize: 27.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily:'SFProDisplay',
+                color: AppTheme.primary5,
+              )),
+              TextSpan(text: "you've always dreamed of", style:TextStyle(
+                fontSize: 27.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily:'SFProDisplay',
+                color: AppTheme.neutral9,
+              )),
+            ],
+          ),
+        ),
+
+        "The better the skills you have, the greater the good job opportunities for you."),
 
   ];
 }

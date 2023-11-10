@@ -1,10 +1,8 @@
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_job_screen.dart';
 import 'package:jobsque/core/features/apply_job/view/screens/apply_successfully.dart';
-import 'package:jobsque/core/features/home/model/job_model.dart';
 import 'package:jobsque/core/features/profile/view/screen/language_screen.dart';
 import 'package:jobsque/core/features/profile/view/screen/login_security_screens/change_password.dart';
 import 'package:jobsque/core/features/profile/view/screen/login_security_screens/phone_number_screen.dart';
@@ -82,7 +80,8 @@ Route? onGenerateRouter(RouteSettings settings){
 
 
     case AppRoute.layoutScreen:
-      return PageSlideTransition(direction: AxisDirection.left, page: const LayoutScreen());
+      return MaterialPageRoute(builder: (_)=>const LayoutScreen());
+      //return PageSlideTransition(direction: AxisDirection.left, page: const LayoutScreen());
 
     case AppRoute.homeScreen:
       return PageSlideTransition(direction: AxisDirection.left, page:  HomeScreen());

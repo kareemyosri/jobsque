@@ -39,9 +39,9 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
     cubit = ProfileCubit.get(context);
     nameController.text = cubit.profile[0].name!;
     bioController.text = cubit.profileDetails[0].bio??'';
-    addressController.text = cubit.profileDetails[0].address!;
+    addressController.text = cubit.profileDetails[0].address??'';
     phoneController.text = cubit.profileDetails[0].mobile??'';
-    workController.text = cubit.profileDetails[0].interestedWork!;
+    workController.text = cubit.profileDetails[0].interestedWork??"";
   }
 
   @override

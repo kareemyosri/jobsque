@@ -22,6 +22,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     // TODO: implement initState
     super.initState();
     cubit = LayoutCubit.get(context);
+    cubit.changeIndex(0);
   }
 
   @override
