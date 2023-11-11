@@ -31,7 +31,16 @@ class _LayoutScreenState extends State<LayoutScreen> {
     return BlocBuilder<LayoutCubit, LayoutState>(
       builder: (context, state) {
         return Scaffold(
-          body: cubit.screens[cubit.currentIndex],
+          body:AnimatedSwitcher(duration: const
+
+          Duration(milliseconds: 500),
+            transitionBuilder: (child, animation) {
+              return FadeTransition(opacity: animation, child: child);
+
+            },
+              child: cubit.screens[cubit.currentIndex],
+            
+          ) ,
           bottomNavigationBar: BottomNavigationBar(
             elevation: 0,
             currentIndex: cubit.currentIndex,
