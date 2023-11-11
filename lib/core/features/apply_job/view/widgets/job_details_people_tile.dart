@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/color.dart';
+import '../../../../../util/styles/color.dart';
 
 class JobDetailsPeopleTile extends StatelessWidget {
    JobDetailsPeopleTile({Key? key, required this.image, required this.name, required this.job, required this.yearsOfExp}) : super(key: key);

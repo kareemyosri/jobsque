@@ -40,10 +40,10 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   top: MediaQuery.of(context).size.height * 0.18,
                   child: BlocBuilder<ProfileCubit, ProfileState>(
                     builder: (context, state) {
-                      if(state is PickImageLoading){
+                      if(state is GetImageLoading|| state is PickImageLoading){
                         return const Center(child: CircularProgressIndicator());
                       }
-                      if( cubit.savedImage!=null){
+                     else if( cubit.savedImage!=null){
                         return Container(
                             width: 90,
                             height: 90,

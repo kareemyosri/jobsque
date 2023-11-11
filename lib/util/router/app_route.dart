@@ -40,6 +40,10 @@ class AppRoute{
   static const String twoStepVerification3="TwoStepVerification3";
   static const String twoStepVerification4="TwoStepVerification4";
 
+  static const String completeProfileScreen="CompleteProfileScreen";
+
+  static const String experienceScreen="ExperienceScreen";
+  static const String educationScreen="EducationScreen";
 
 
 

@@ -2,11 +2,14 @@ import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
+import 'package:jobsque/util/widgets/ElvatedButton.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/router/app_route.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
+import '../../../../../util/widgets/snack_bar.dart';
 import '../../../apply_job/view/widgets/portfolio_item.dart';
 import '../widgets/upload_file.dart';
 
@@ -20,23 +23,27 @@ class PortfolioScreen extends StatefulWidget {
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
   late ProfileCubit cubit;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cubit=ProfileCubit.get(context);
+    cubit = ProfileCubit.get(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar('Portfolio',context),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-               Text(
+      appBar: customAppBar('Portfolio', context),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                Text(
                 'Add portfolio here',
                 style: TextStyle(
                   color: AppTheme.neutral9,
@@ -58,7 +65,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                         CustomPortfolioItem(text: cubit.selectedCVFile!
                             .path
                             .split('/')
-                            .last, size: ((cubit.selectedCVFile!.lengthSync())/1024/1024).toStringAsFixed(2), selectedFile: cubit.selectedCVFile!,),
+                            .last,
+                          size: ((cubit.selectedCVFile!.lengthSync()) / 1024 /
+                              1024).toStringAsFixed(2),
+                          selectedFile: cubit.selectedCVFile!,),
                     fallback: (context) => const SizedBox.shrink(),
 
                   );
@@ -74,10 +84,31 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               //     itemBuilder: (context, index) =>  const CustomPortfolioItem(text: 'test', size: '200',)),
 
               SizedBox(height: 2.h),
-            ],
-          ),
+              ],
+            ),),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child:  BlocConsumer<ProfileCubit, ProfileState>(
+                listener: (context, state) {
+                  if (state is AddItemCompleteProfile) {
+                    showSuccessSnackBar(
+                        context: context,
+                        message: 'Portfolio Updated Successfully');
+                    Navigator.pop(context);
+                  }
+                },
+                builder: (context, state) {
+                  return CustomElevatedButton(() {
+                    cubit.addItem('Portfolio');
+                  }, 'Save');
+                },
+              ),
+
+            )
+          ],
         ),
-      ),
+      )
+    ,
     );
   }
 }

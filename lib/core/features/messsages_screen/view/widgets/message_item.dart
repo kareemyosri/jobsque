@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobsque/core/features/messsages_screen/model/messageModel.dart';
 import 'package:sizer/sizer.dart';
 
-import '../styles/color.dart';
+import '../../../../../util/styles/color.dart';
 
 class MessageItem extends StatelessWidget {
   final MessageModel messageModel;

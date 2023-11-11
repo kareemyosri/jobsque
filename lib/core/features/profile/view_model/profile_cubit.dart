@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jobsque/util/database/local_database/cache_helper.dart';
 import 'package:jobsque/util/database/remoteDatabase/endpoints.dart';
+import 'package:jobsque/util/enums.dart';
 import 'package:meta/meta.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -21,6 +24,16 @@ class ProfileCubit extends Cubit<ProfileState>  {
 
 
   static ProfileCubit get(context)=>BlocProvider.of(context);
+
+  Set<String> completeProfile={};
+  void addItem(String item){
+    emit(AddItemCompleteProfileLoading());
+    completeProfile.add(item);
+    if(completeProfile.length==4){
+      CashHelper.putString(key: MySharedKeys.completeProfile, value: 'true');
+    }
+    emit(AddItemCompleteProfile());
+  }
 
 List<Portfolio> portfolios=[];
 List<Profile> profileDetails=[];
@@ -271,6 +284,7 @@ List<ProfileData> profile=[];
         emit(GetImageSuccess());
       }
       else{
+        savedImage=null;
         emit(GetImageError());
 
       }

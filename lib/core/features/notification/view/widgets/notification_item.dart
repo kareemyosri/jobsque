@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/features/notification/model/notificationModel.dart';
-import '../styles/color.dart';
+import '../../model/notificationModel.dart';
+import '../../../../../util/styles/color.dart';
 
 class NotificationItem extends StatelessWidget {
   final NotificationModel notification;

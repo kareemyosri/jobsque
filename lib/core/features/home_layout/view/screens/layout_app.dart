@@ -23,6 +23,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     super.initState();
     cubit = LayoutCubit.get(context);
     cubit.changeIndex(0);
+    cubit.getCompleteProfile();
   }
 
   @override
@@ -36,6 +37,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
             currentIndex: cubit.currentIndex,
             onTap: (index) {
               cubit.changeIndex(index);
+              // if (index == 4) {
+              //   cubit.getCompleteProfile();
+              // }
             },
             selectedItemColor: AppTheme.primary5,
             selectedLabelStyle: TextStyle(

@@ -4,6 +4,9 @@ part of 'profile_cubit.dart';
 abstract class ProfileState {}
 
 class ProfileInitial extends ProfileState {}
+class AddItemCompleteProfile extends ProfileState {}
+class AddItemCompleteProfileLoading extends ProfileState {}
+
 
 class GetProfileLoading extends ProfileState {}
 class GetProfileError extends ProfileState {}

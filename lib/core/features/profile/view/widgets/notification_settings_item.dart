@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/features/profile/model/NotificationSettingsModel.dart';
-import '../styles/color.dart';
+import '../../model/NotificationSettingsModel.dart';
+import '../../../../../util/styles/color.dart';
 
 class CustomNotificationsSettingItem extends StatefulWidget {
   final NotificationSettingsModel setting;

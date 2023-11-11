@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../model/NotificationSettingsModel.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/header.dart';
-import '../../../../../util/widgets/notification_settings_item.dart';
+import '../widgets/notification_settings_item.dart';
 
 
 class NotificationsSettingsScreen extends StatelessWidget {

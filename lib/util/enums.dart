@@ -1,4 +1,5 @@
 enum MySharedKeys{
+  completeProfile,
   rememberMe,
   email,
   userId,

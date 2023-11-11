@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../util/widgets/app_bar.dart';
 import '../../../../util/widgets/header.dart';
-import '../../../../util/widgets/notification_item.dart';
+import 'widgets/notification_item.dart';
 import 'notification_empty_screen.dart';
 
 

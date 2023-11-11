@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:jobsque/core/features/profile/view_model/profile_cubit.dart';
 import 'package:jobsque/util/database/local_database/cache_helper.dart';
 import 'package:jobsque/util/enums.dart';
+import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -242,19 +243,30 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                     else if (state is UpdateProfileError){
                       showErrorSnackBar(context: context, message: 'There is something went Wrong. Try Again');
                     }
+                    else if (state is AddItemCompleteProfile){
+                      showSuccessSnackBar(context: context, message: 'Personal Details Updated Successfully');
+                      Navigator.pop(context);
+                    }
                   },
                   builder: (context, state) {
                     if (state is! UpdateProfileLoading) {
                       return CustomElevatedButton(() {
-                        cubit.updateProfileNameAndPassword(
-                            name: nameController.text,
-                            password: CashHelper.getString(
-                                key: MySharedKeys.password));
-                        cubit.updateUserData(
-                            interestedWork: workController.text,
-                            mobile: phoneController.text,
-                            address: addressController.text,
-                            bio: bioController.text);
+                        if(CashHelper.getString(key: MySharedKeys.completeProfile)==''){
+                          cubit.addItem('Personal Details');
+
+                        }
+                        else{
+                          cubit.updateProfileNameAndPassword(
+                              name: nameController.text,
+                              password: CashHelper.getString(
+                                  key: MySharedKeys.password));
+                          cubit.updateUserData(
+                              interestedWork: workController.text,
+                              mobile: phoneController.text,
+                              address: addressController.text,
+                              bio: bioController.text);
+                        }
+
                       }, "Save");
                     } else {
                       return const Center(child: CircularProgressIndicator());

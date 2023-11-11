@@ -30,7 +30,10 @@ import '../../core/features/login/view/screens/login_screen.dart';
 import '../../core/features/notification/view/notification_screen.dart';
 import '../../core/features/onboarding/view/screens/onboarding_screen.dart';
 import '../../core/features/profile/model/pdf_args.dart';
+import '../../core/features/profile/view/screen/complete_profile_screen.dart';
 import '../../core/features/profile/view/screen/edit_details_screen.dart';
+import '../../core/features/profile/view/screen/education_screen.dart';
+import '../../core/features/profile/view/screen/experience_screen.dart';
 import '../../core/features/profile/view/screen/help_center_screen.dart';
 import '../../core/features/profile/view/screen/login_security_screen.dart';
 import '../../core/features/profile/view/screen/login_security_screens/email_address_screen.dart';
@@ -81,7 +84,6 @@ Route? onGenerateRouter(RouteSettings settings){
 
     case AppRoute.layoutScreen:
       return MaterialPageRoute(builder: (_)=>const LayoutScreen());
-      //return PageSlideTransition(direction: AxisDirection.left, page: const LayoutScreen());
 
     case AppRoute.homeScreen:
       return PageSlideTransition(direction: AxisDirection.left, page:  HomeScreen());
@@ -156,6 +158,14 @@ Route? onGenerateRouter(RouteSettings settings){
 
     case AppRoute.twoStepVerification4:
       return PageSlideTransition(direction: AxisDirection.right, page:   TwoStepVerification4());
+    case AppRoute.experienceScreen:
+      return PageSlideTransition(direction: AxisDirection.right, page:   const ExperienceScreen());
+    case AppRoute.educationScreen:
+      return PageSlideTransition(direction: AxisDirection.right, page:   const EducationScreen());
+    case AppRoute.completeProfileScreen:
+
+      return PageSlideTransition(direction: AxisDirection.right, page:    const CompleteProfileScreen());
+
 
     default:
       return null;

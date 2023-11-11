@@ -7,7 +7,7 @@ import '../../../model/NotificationSettingsModel.dart';
 import '../../../../../../util/styles/color.dart';
 import '../../../../../../util/widgets/ElvatedButton.dart';
 import '../../../../../../util/widgets/app_bar.dart';
-import '../../../../../../util/widgets/notification_settings_item.dart';
+import '../../widgets/notification_settings_item.dart';
 
 class TwoStepVerification2 extends StatelessWidget {
    TwoStepVerification2({Key? key}) : super(key: key);

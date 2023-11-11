@@ -7,7 +7,7 @@ import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/bottom_sheet_item.dart';
 import '../../../../../util/widgets/bottom_sheet_savedJob.dart';
-import '../../../../../util/widgets/message_item.dart';
+import '../widgets/message_item.dart';
 import '../../../../../util/widgets/search_bar.dart';
 import '../../model/messageModel.dart';
 
