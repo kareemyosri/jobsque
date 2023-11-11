@@ -85,22 +85,16 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => OnboardingCubit(),
             ),
-            // BlocProvider(
-            //   create: (context) => AppliedJobCubit()..getAppliedJobsId(),
-            // ),
+
 
           ],
           child: MaterialApp(
-            // useInheritedMediaQuery: true,
-            // locale: DevicePreview.locale(context),
-            //  builder: DevicePreview.appBuilder,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               fontFamily: 'SFProDisplay',
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            //home: ShimmerAppliedListView(),
             onGenerateRoute: onGenerateRouter,
 
           ),

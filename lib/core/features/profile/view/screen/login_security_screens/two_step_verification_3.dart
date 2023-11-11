@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -79,7 +80,9 @@ class TwoStepVerification3 extends StatelessWidget {
               obscureText: true,
             ),
             const Spacer(),
-            CustomElevatedButton(() { }, "Send Code"),
+            CustomElevatedButton(() {
+              Navigator.pushNamed(context, AppRoute.twoStepVerification4);
+            }, "Send Code"),
 
           ],
         ),

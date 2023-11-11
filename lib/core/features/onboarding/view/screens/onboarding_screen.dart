@@ -45,6 +45,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Padding(
             padding: EdgeInsets.only(right: 2.h),
             child: TextButton(onPressed: () {
+              CashHelper.putString(key: MySharedKeys.onboarding, value: 'true');
+
               Navigator.pushNamedAndRemoveUntil(
                   context, AppRoute.loginScreen, (route) => false);
             }, child: const Text("Skip")),

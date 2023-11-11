@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/util/router/app_route.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -101,7 +102,9 @@ class TwoStepVerification2 extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            CustomElevatedButton(() { }, "Next"),
+            CustomElevatedButton(() {
+              Navigator.pushNamed(context, AppRoute.twoStepVerification3);
+            }, "Next"),
 
           ],
         ),

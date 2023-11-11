@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:jobsque/util/router/app_route.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../model/NotificationSettingsModel.dart';
@@ -35,7 +36,9 @@ class TwoStepVerification1 extends StatelessWidget {
             const TwoStepVerificationTile(icon: Iconsax.external_drive, text: "Adding a phone number or using an authenticator will help keep your account safe from harm."),
 
             const Spacer(),
-            CustomElevatedButton(() { }, "Next"),
+            CustomElevatedButton(() {
+              Navigator.pushNamed(context, AppRoute.twoStepVerification2);
+            }, "Next"),
 
           ],
         ),

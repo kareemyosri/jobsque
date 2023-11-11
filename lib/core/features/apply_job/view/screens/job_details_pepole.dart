@@ -96,8 +96,9 @@ class JobDetailsPepole extends StatelessWidget {
             ),
             SizedBox(height: 3.h,),
             ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemBuilder: (context,index)=> JobDetailsPeopleTile(image:"https://cdn-icons-png.flaticon.com/128/3536/3536424.png", name: "Dimas Adi Saputro", job: "Senior UI/UX Designer at Twitter", yearsOfExp: "5 Years"),
+                itemBuilder: (context,index)=> JobDetailsPeopleTile(image:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTZClNi2dGGXiI5K7tZaMrc2CT6Ysy5zmeBXaORUA7dz2ZNFYeR", name: "Dimas Adi Saputro", job: "Senior UI/UX Designer at Twitter", yearsOfExp: "5 Years"),
 
                 separatorBuilder: (context,index)=>const Divider(),
                 itemCount: 5

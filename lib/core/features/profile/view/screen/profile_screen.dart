@@ -11,6 +11,7 @@ import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/header.dart';
 import '../../../../../util/widgets/snack_bar.dart';
+import '../../../home/view_model/home_cubit.dart';
 import '../widgets/general_data.dart';
 import '../widgets/others_data.dart';
 import '../widgets/personal_details.dart';
@@ -45,6 +46,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             onPressed: () {
               CashHelper.removeCacheKey(key: MySharedKeys.token).then((value) {
+
+               // cubit.close();
+              //  HomeCubit.get(context).close();
                 Navigator.pushNamedAndRemoveUntil(context, AppRoute.loginScreen, (route) => false);
                 showSuccessSnackBar(context: context, message: 'Logged out Successfully');
 

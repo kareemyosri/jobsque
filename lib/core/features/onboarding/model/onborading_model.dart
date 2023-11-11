@@ -37,7 +37,7 @@ class OnboardingModel {
   ),
 
         "Explore over 25,924 available job roles and upgrade your operator now."),
-    OnboardingModel("assets/images/onboarding/Background22.svg",
+    OnboardingModel("assets/images/onboarding/background-3.svg",
         Text.rich(
           TextSpan(
             children: [
@@ -60,7 +60,7 @@ class OnboardingModel {
 
         "Immediately join us and start applying for the job you are interested in."),
 
-    OnboardingModel("assets/images/onboarding/Background (2).svg",
+    OnboardingModel("assets/images/onboarding/background-4.svg",
         Text.rich(
           TextSpan(
             children: [

@@ -15,6 +15,9 @@ import '../../../../../util/widgets/app_bar.dart';
 import '../../../../../util/widgets/phone_textFormField.dart';
 import '../../../../../util/widgets/snack_bar.dart';
 
+
+
+
 class EditDetalisScreen extends StatefulWidget {
   EditDetalisScreen({Key? key}) : super(key: key);
 
@@ -96,7 +99,7 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                                         )
                                             : const DecorationImage(
                                           image: NetworkImage(
-                                              "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTZClNi2dGGXiI5K7tZaMrc2CT6Ysy5zmeBXaORUA7dz2ZNFYeR"),
+                                              "https://icons-for-free.com/iconfiles/png/512/man+person+profile+user+icon-1320073176482503236.png"),
                                           fit: BoxFit.fill,
                                         ),
                                         shape: const OvalBorder(

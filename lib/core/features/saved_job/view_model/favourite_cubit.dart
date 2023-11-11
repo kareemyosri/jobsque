@@ -13,27 +13,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
 
   static FavouriteCubit get(context) => BlocProvider.of(context);
 
-// final _tempDir = Directory.systemTemp;
-//
-// Future<void> shareImageFromApi({required String imageUrl, required String text, required String subject }) async {
-//   // Download the image from the API link.
-//   final response = await http.get(Uri.parse(imageUrl));
-//
-//   // Save the downloaded image to a temporary file on the device.
-//   final tempFile = await File('${_tempDir.path}/image.png').create();
-//   await tempFile.writeAsBytes(response.bodyBytes);
-//
-//   // Share the temporary image file using the share_plus package.
-//   await Share.shareFiles([tempFile.path],
-//
-//       subject: subject,
-//     text: text,
-//
-//   );
-//
-//   // Delete the temporary image file.
-//   await tempFile.delete();
-// }
+
 
   Future<void> shareImageFromApi({
     required String imageUrl,

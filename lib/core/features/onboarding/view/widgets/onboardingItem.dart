@@ -19,7 +19,10 @@ class BoardingItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SlideTransitionAnimation(duration: const Duration(seconds:1), begin:  const Offset(0.2, 0), end: Offset.zero,
-            child: SvgPicture.asset(model.image, ),),
+            child: SvgPicture.asset(model.image,
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+            ),),
 
           SizedBox(height: 0.5.h,),
           SlideTransitionAnimation(duration: const Duration(seconds: 1), begin:  const Offset(0.1, 0), end: Offset.zero,

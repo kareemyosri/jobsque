@@ -43,10 +43,10 @@ List<Profile> profileDetails=[];
     DioHelper.getData(url: portofolioUrl)
         .then((value) {
          // print(value.data);
-      for (var portfolio in value.data['data']['portfolio']) {
-        portfolios.add(Portfolio.fromJson(portfolio));
-        print(portfolio);
-      }
+      // for (var portfolio in value.data['data']['portfolio']) {
+      //   portfolios.add(Portfolio.fromJson(portfolio));
+      //   print(portfolio);
+      // }
       profileDetails.add(Profile.fromJson(value.data['data']['profile']) );
           print(profileDetails[0]);
 
@@ -293,6 +293,12 @@ List<ProfileData> profile=[];
       emit(GetImageError());
 
     }
+  }
+
+  @override
+  Future<void> close() {
+    // TODO: implement close
+    return super.close();
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:jobsque/core/features/saved_job/view_model/favourite_cubit.dart'
 import 'package:jobsque/util/router/app_route.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../../util/animations/slide_transition_animation.dart';
 import '../../../../../util/styles/color.dart';
 import '../../../../../util/widgets/bottom_sheet_item.dart';
 import '../../../../../util/widgets/bottom_sheet_savedJob.dart';
@@ -74,36 +75,39 @@ class _SavedJobItemState extends State<SavedJobItem> {
           trailing: IconButton(
             onPressed: () {
               Scaffold.of(context).showBottomSheet<void>(
-                (BuildContext context) =>  CustomBottomSheet(
-                  items: [
-                     BottomSheetItem(
-                      'Apply Job',
-                      actionIcon: Iconsax.directbox_notif,
-                      onTap: (){
-                        Navigator.pushNamed(context, AppRoute.jobDetailsScreen,arguments:
-                        widget.favouriteData.jobs
-                        );
-                      },
-                    ),
-                     BottomSheetItem('Share via...', actionIcon: Iconsax.export,
-                    onTap: () async{
-                     await FavouriteCubit.get(context).shareImageFromApi(
-                         imageUrl: widget.favouriteData.image!,
-                         text:widget.favouriteData.jobs!.jobDescription!,
-                         subject:widget.favouriteData.jobs!.name!
-                     );
+                (BuildContext context) =>
+                    SlideTransitionAnimation(duration: const Duration(seconds:1), begin:  const Offset(0, 0.2), end: Offset.zero,
+                      child:   CustomBottomSheet(
+                        items: [
+                          BottomSheetItem(
+                            'Apply Job',
+                            actionIcon: Iconsax.directbox_notif,
+                            onTap: (){
+                              Navigator.pushNamed(context, AppRoute.jobDetailsScreen,arguments:
+                              widget.favouriteData.jobs
+                              );
+                            },
+                          ),
+                          BottomSheetItem('Share via...', actionIcon: Iconsax.export,
+                            onTap: () async{
+                              await FavouriteCubit.get(context).shareImageFromApi(
+                                  imageUrl: widget.favouriteData.image!,
+                                  text:widget.favouriteData.jobs!.jobDescription!,
+                                  subject:widget.favouriteData.jobs!.name!
+                              );
 
 
-                      },
-                    ),
-                    BottomSheetItem('Cancel save',
-                        actionIcon: Iconsax.archive_minus,
-                    onTap: (){
-                      cubit.removeFavourite(widget.favouriteData.id.toString());
-                    },
-                    ),
-                  ],
-                ),
+                            },
+                          ),
+                          BottomSheetItem('Cancel save',
+                            actionIcon: Iconsax.archive_minus,
+                            onTap: (){
+                              cubit.removeFavourite(widget.favouriteData.id.toString());
+                            },
+                          ),
+                        ],
+                      ),),
+
               );
             },
             icon: const Icon(
