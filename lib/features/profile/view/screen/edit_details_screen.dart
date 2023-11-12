@@ -246,16 +246,22 @@ class _EditDetalisScreenState extends State<EditDetalisScreen> {
                     else if (state is UpdateProfileError){
                       showErrorSnackBar(context: context, message: 'There is something went Wrong. Try Again');
                     }
-                    else if (state is AddItemCompleteProfile){
-                      showSuccessSnackBar(context: context, message: 'Personal Details Updated Successfully');
-                      Navigator.pop(context);
-                    }
+
                   },
                   builder: (context, state) {
                     if (state is! UpdateProfileLoading) {
                       return CustomElevatedButton(() {
                         if(CashHelper.getString(key: MySharedKeys.completeProfile)==''){
                           cubit.addItem('Personal Details');
+                          cubit.updateProfileNameAndPassword(
+                              name: nameController.text,
+                              password: CashHelper.getString(
+                                  key: MySharedKeys.password));
+                          cubit.updateUserData(
+                              interestedWork: workController.text,
+                              mobile: phoneController.text,
+                              address: addressController.text,
+                              bio: bioController.text);
 
                         }
                         else{

@@ -58,3 +58,10 @@ class OldImageDeleted extends ProfileState {}
 class GetImageLoading extends ProfileState {}
 class GetImageError extends ProfileState {}
 class GetImageSuccess extends ProfileState {}
+
+class AddExperienceLoadingState extends ProfileState {}
+class AddExperienceErrorState extends ProfileState {}
+class AddExperienceSuccessState extends ProfileState {}
+
+//Experience check box
+class ChangeCheckExperienceState extends ProfileState {}

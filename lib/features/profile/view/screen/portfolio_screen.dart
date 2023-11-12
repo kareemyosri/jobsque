@@ -1,15 +1,17 @@
 import 'package:buildcondition/buildcondition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/core/database/local_database/cache_helper.dart';
+import 'package:jobsque/core/enums.dart';
 import 'package:jobsque/features/profile/view_model/profile_cubit.dart';
 import 'package:jobsque/core/widgets/ElvatedButton.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../../../core/router/app_route.dart';
 import '../../../../../core/styles/color.dart';
 import '../../../../../core/widgets/app_bar.dart';
 import '../../../../../core/widgets/snack_bar.dart';
+
 import '../../../apply_job/view/widgets/portfolio_item.dart';
 import '../widgets/upload_file.dart';
 
@@ -78,10 +80,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
               //! Portfiolos List
               // ListView.builder(
-              //     itemCount: 3,
+              //     itemCount: cubit.portfolios.length,
               //     shrinkWrap: true,
               //     physics: const NeverScrollableScrollPhysics(),
-              //     itemBuilder: (context, index) =>  const CustomPortfolioItem(text: 'test', size: '200',)),
+              //     itemBuilder: (context, index) => CustomPortfolioItem(text: cubit.portfolios[index].cvFile!,
+              //       size: '200',
+              //        selectedFile: cubit.portfolios[index].image,
+              //
+              //     )),
 
               SizedBox(height: 2.h),
               ],
@@ -90,16 +96,30 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               alignment: Alignment.bottomCenter,
               child:  BlocConsumer<ProfileCubit, ProfileState>(
                 listener: (context, state) {
-                  if (state is AddItemCompleteProfile) {
+                  if (state is AddCVSuccessState) {
                     showSuccessSnackBar(
                         context: context,
                         message: 'Portfolio Updated Successfully');
                     Navigator.pop(context);
                   }
+                  else if (state is AddCVErrorState) {
+                    showErrorSnackBar(
+                        context: context,
+                        message: 'There something wrong, Try Again');
+
+                  }
                 },
                 builder: (context, state) {
                   return CustomElevatedButton(() {
-                    cubit.addItem('Portfolio');
+                    if(cubit.selectedCVFile!=null){
+                      cubit.addPortofolio();
+
+                    }
+                     if(CashHelper.getString(key: MySharedKeys.completeProfile)==''){
+                      cubit.addItem('Portfolio');
+
+                    }
+
                   }, 'Save');
                 },
               ),

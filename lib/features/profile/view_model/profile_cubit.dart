@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,10 +44,10 @@ List<Profile> profileDetails=[];
     DioHelper.getData(url: portofolioUrl)
         .then((value) {
          // print(value.data);
-      // for (var portfolio in value.data['data']['portfolio']) {
-      //   portfolios.add(Portfolio.fromJson(portfolio));
-      //   print(portfolio);
-      // }
+      for (var portfolio in value.data['data']['portfolio']) {
+        portfolios.add(Portfolio.fromJson(portfolio));
+        print(portfolio);
+      }
       profileDetails.add(Profile.fromJson(value.data['data']['profile']) );
           print(profileDetails[0]);
 
@@ -189,36 +190,6 @@ List<ProfileData> profile=[];
   }
 
 
-  File? selectedCVFile;
-  File? selectedOtherFile;
-
-
-  Future<void> pickFile(String target) async {
-    emit(PickCVLoading());
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: target == 'CV' ? ['pdf'] : ['jpg', 'png','heic','jpeg','gif','svg'],
-    );
-
-    if (result != null) {
-      File file = File(result.files.single.path!);
-
-      if (target == 'CV') {
-        selectedCVFile = file;
-      } else if (target == 'Other') {
-        selectedOtherFile = file;
-      }
-      emit(PickCVSuccess());
-
-
-    } else {
-      emit(PickCVError());
-      return;
-    }
-  }
-
-
-
    File? savedImage;
 
 
@@ -295,6 +266,113 @@ List<ProfileData> profile=[];
     }
   }
 
+
+  void addExperience(
+      {
+        required String position,
+        required String typeWork,
+        required String companyName,
+        required String location,
+        required String startDate,
+
+
+      }
+      )
+  {
+    emit(AddExperienceLoadingState());
+
+    DioHelper.PostData(url: updateProfileUrl, data: {
+      'user_id': CashHelper.getString(key: MySharedKeys.userId),
+      'postion':position,
+      'type_work': typeWork,
+      'comp_name': companyName,
+      'location': location,
+      'start': startDate,
+    },
+
+
+    ).then((value) {
+      addItem('Experience');
+
+      emit(AddExperienceSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AddExperienceErrorState());
+    });
+  }
+
+//Experience checkBox
+  bool isChecked = false;
+
+  void changeCheck(newValue){
+    isChecked=newValue;
+    emit(ChangeCheckExperienceState());
+  }
+
+
+
+  File? selectedCVFile;
+  File? selectedOtherFile;
+
+
+  Future<void> pickFile(String target) async {
+    emit(PickCVLoading());
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: target == 'CV' ? ['pdf'] : ['jpg', 'png','heic','jpeg','gif','svg'],
+    );
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+
+      if (target == 'CV') {
+        selectedCVFile = file;
+      } else if (target == 'Other') {
+        selectedOtherFile = file;
+      }
+      emit(PickCVSuccess());
+
+
+    } else {
+      emit(PickCVError());
+      return;
+    }
+  }
+
+  void addPortofolio(
+
+      ) async {
+
+
+    try {
+      emit(AddCVLoadingState());
+
+
+
+      FormData formData = FormData.fromMap({
+        'cv_file': await MultipartFile.fromFile(selectedCVFile!.path),
+
+        'image': await MultipartFile.fromFile(selectedCVFile!.path),
+
+      });
+
+
+      final response = await DioHelper.PostFormData(url: portofolioUrl, data: formData);
+
+      if (response.statusCode == 200) {
+        print(response.data);
+        getProfileDetailsAndPortfolios();
+        emit(AddCVSuccessState());
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        emit(AddCVErrorState());
+      }
+    } catch (error) {
+      print(error);
+      emit(AddCVErrorState());
+    }
+  }
+
   @override
   Future<void> close() {
     // TODO: implement close
@@ -305,38 +383,7 @@ List<ProfileData> profile=[];
 
 
 
-// void addPortofolio(
-  //
-  //     ) async {
-  //
-  //
-  //   try {
-  //     emit(AddCVLoadingState());
-  //
-  //
-  //
-  //     FormData formData = FormData.fromMap({
-  //       'cv_file': await MultipartFile.fromFile(selectedCVFile!.path),
-  //
-  //       'image': await MultipartFile.fromFile(selectedCVFile!.path),
-  //
-  //     });
-  //
-  //
-  //     final response = await DioHelper.PostFormData(url: portofolioUrl, data: formData);
-  //
-  //     if (response.statusCode == 200) {
-  //       print(response.data);
-  //       emit(AddCVSuccessState());
-  //     } else {
-  //       print('Request failed with status: ${response.statusCode}');
-  //       emit(AddCVErrorState());
-  //     }
-  //   } catch (error) {
-  //     print(error);
-  //     emit(AddCVErrorState());
-  //   }
-  // }
+
 
 
 

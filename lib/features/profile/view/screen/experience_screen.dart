@@ -28,7 +28,6 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
   TextEditingController locationController = TextEditingController();
 
   TextEditingController startYearController = TextEditingController();
-  bool? isChecked = false;
   List<DropdownMenuItem<String>> menuItems = [
     DropdownMenuItem(
         value: "Full time",
@@ -55,9 +54,9 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
   ];
 
   String selectedValue = "Full time";
+  final formKey = GlobalKey<FormState>();
 
   late ProfileCubit cubit;
-
 
   @override
   void initState() {
@@ -90,199 +89,238 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Position *',
-                      style: TextStyle(
-                        color: AppTheme.neutral4,
-                        fontSize: 13.5.sp,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 0.5.h,
-                    ),
-                    CustomTextFormField(
-                        controller: positionController,
-                        hintText: "Position",
-                        obscureText: false),
-
-                    SizedBox(
-                      height: 2.h,
-                    ),
-
-                    Text(
-                      'Type of work',
-                      style: TextStyle(
-                        color: AppTheme.neutral4,
-                        fontSize: 13.5.sp,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 0.5.h,
-                    ),
-                    DropdownButtonFormField(
-                        icon: const Icon(
-                          Iconsax.arrow_down_14,
-                          color: AppTheme.neutral9,
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Position *',
+                        style: TextStyle(
+                          color: AppTheme.neutral4,
+                          fontSize: 13.5.sp,
+                          fontFamily: 'SFProDisplay',
+                          fontWeight: FontWeight.w500,
                         ),
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              color: AppTheme.neutral3,
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      CustomTextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Position must not be empty';
+                            } else {
+                              return null;
+                            }
+                          },
+                          controller: positionController,
+                          hintText: "Position",
+                          obscureText: false),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(
+                        'Type of work',
+                        style: TextStyle(
+                          color: AppTheme.neutral4,
+                          fontSize: 13.5.sp,
+                          fontFamily: 'SFProDisplay',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      DropdownButtonFormField(
+                          icon: const Icon(
+                            Iconsax.arrow_down_14,
+                            color: AppTheme.neutral9,
+                          ),
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                color: AppTheme.neutral3,
+                              ),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: AppTheme.primary5),
                             ),
                           ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: AppTheme.primary5),
-                          ),
+                          value: selectedValue,
+                          onChanged: (String? newValue) {
+                            selectedValue = newValue!;
+                          },
+                          items: menuItems),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(
+                        'Company name *',
+                        style: TextStyle(
+                          color: AppTheme.neutral4,
+                          fontSize: 13.5.sp,
+                          fontFamily: 'SFProDisplay',
+                          fontWeight: FontWeight.w500,
                         ),
-                        value: selectedValue,
-                        onChanged: (String? newValue) {
-                          selectedValue = newValue!;
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      CustomTextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Company must not be empty';
+                          } else {
+                            return null;
+                          }
                         },
-                        items: menuItems),
-                    //CustomTextFormField(controller: titleController, hintText: "Title", obscureText: false),
-
-                    SizedBox(
-                      height: 2.h,
-                    ),
-
-                    Text(
-                      'Company name *',
-                      style: TextStyle(
-                        color: AppTheme.neutral4,
-                        fontSize: 13.5.sp,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w500,
+                        controller: companyNameController,
+                        hintText: "Company Name",
+                        obscureText: false,
                       ),
-                    ),
-                    SizedBox(
-                      height: 0.5.h,
-                    ),
-                    CustomTextFormField(
-                      controller: companyNameController,
-                      hintText: "Company Name",
-                      obscureText: false,
-                    ),
-
-                    SizedBox(
-                      height: 2.h,
-                    ),
-
-                    Text(
-                      'Location',
-                      style: TextStyle(
-                        color: AppTheme.neutral4,
-                        fontSize: 13.5.sp,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w500,
+                      SizedBox(
+                        height: 2.h,
                       ),
-                    ),
-                    SizedBox(
-                      height: 0.5.h,
-                    ),
-                    CustomTextFormField(
-                      controller: locationController,
-                      hintText: "Location",
-                      obscureText: false,
-                      prefixIcon: const Icon(Iconsax.location),
-                      prefixIconColor: AppTheme.neutral9,
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            value: isChecked,
-                            activeColor: AppTheme.primary5,
-                            checkColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            side: const BorderSide(
-                              color: AppTheme.neutral4,
-                            ),
-                            onChanged: (newValue) {
-                              setState(() {
-                                isChecked = newValue;
-                              });
-                            }),
-                        FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text(
-                            'I am currently working in this role',
-                            style: TextStyle(
-                              color: AppTheme.neutral9,
-                              fontSize: 11.5.sp,
-                              fontFamily: 'SFProDisplay',
-                              fontWeight: FontWeight.w500,
+                      Text(
+                        'Location',
+                        style: TextStyle(
+                          color: AppTheme.neutral4,
+                          fontSize: 13.5.sp,
+                          fontFamily: 'SFProDisplay',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      CustomTextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Location must not be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: locationController,
+                        hintText: "Location",
+                        obscureText: false,
+                        prefixIcon: const Icon(Iconsax.location),
+                        prefixIconColor: AppTheme.neutral9,
+                      ),
+                      Row(
+                        children: [
+                          BlocBuilder<ProfileCubit, ProfileState>(
+                            builder: (context, state) {
+                              return Checkbox(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  value: cubit.isChecked,
+                                  activeColor: AppTheme.primary5,
+                                  checkColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  side: const BorderSide(
+                                    color: AppTheme.neutral4,
+                                  ),
+                                  onChanged: (newValue) {
+                                    cubit.changeCheck(newValue);
+                                  });
+                            },
+                          ),
+                          FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text(
+                              'I am currently working in this role',
+                              style: TextStyle(
+                                color: AppTheme.neutral9,
+                                fontSize: 11.5.sp,
+                                fontFamily: 'SFProDisplay',
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: 2.h,
-                    ),
-
-                    Text(
-                      'Start Year *',
-                      style: TextStyle(
-                        color: AppTheme.neutral4,
-                        fontSize: 13.5.sp,
-                        fontFamily: 'SFProDisplay',
-                        fontWeight: FontWeight.w500,
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 0.5.h,
-                    ),
-                    CustomTextFormField(
-                      controller: startYearController,
-                      hintText: "Start Year",
-                      obscureText: false,
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1970),
-                            //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2101));
-
-                        //print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
-                        String formattedDate =
-                            DateFormat.yMMMM().format(pickedDate!);
-                        startYearController.text =
-                            formattedDate; //set output date to TextField value.
-                      },
-                    ),
-
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    BlocConsumer<ProfileCubit, ProfileState>(
-                      listener: (context, state) {
-                        if (state is AddItemCompleteProfile) {
-                          showSuccessSnackBar(
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(
+                        'Start Year *',
+                        style: TextStyle(
+                          color: AppTheme.neutral4,
+                          fontSize: 13.5.sp,
+                          fontFamily: 'SFProDisplay',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      CustomTextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Start Year must not be empty';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: startYearController,
+                        hintText: "Start Year",
+                        obscureText: false,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              message: 'Experience Updated Successfully');
-                         Navigator.pop(context);
-                        }
-                        // TODO: implement listener
-                      },
-                      builder: (context, state) {
-                        return CustomElevatedButton(() {
-                          cubit.addItem('Experience');
-                        }, "Save");
-                      },
-                    )
-                  ],
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1970),
+                              //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2101));
+
+                          //print(pickedDate);  //pickedDate output format => 2021-03-10 00:00:00.000
+                          String formattedDate =
+                              DateFormat.yMMMM().format(pickedDate!);
+                          startYearController.text =
+                              formattedDate; //set output date to TextField value.
+                        },
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      BlocConsumer<ProfileCubit, ProfileState>(
+                        listener: (context, state) {
+                          if (state is AddExperienceSuccessState) {
+                            showSuccessSnackBar(
+                                context: context,
+                                message: 'Experience Updated Successfully');
+                            Navigator.pop(context);
+                          }
+                          else if (state is AddExperienceErrorState) {
+                            showErrorSnackBar(
+                                context: context,
+                                message: 'There something wrong, Try Again');
+
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is! AddExperienceLoadingState) {
+                            return CustomElevatedButton(() {
+                              if (formKey.currentState!.validate()) {
+                                cubit.addExperience(
+                                    position: positionController.text,
+                                    typeWork: selectedValue,
+                                    companyName: companyNameController.text,
+                                    location: locationController.text,
+                                    startDate: startYearController.text);
+                              }
+                            }, "Save");
+                          } else {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
